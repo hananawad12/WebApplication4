@@ -34,7 +34,7 @@ namespace WeddingGo
 
 			services.AddMvc();
 
-			services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
 			//services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
 
 			//services.AddScoped<IClientRepositery, MakeupArtistRepositery>();

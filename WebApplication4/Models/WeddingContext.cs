@@ -18,5 +18,7 @@ namespace WeddingGo.Models
 		public DbSet<Atelier> Ateliers { get; set; }
 		public DbSet<WeddingHall> WeddingHalls { get; set; }
 		public DbSet<Package> Packages { get; set; }
-	}
+        public DbSet<Client> Clients { get; set; }
+
+    }
 }

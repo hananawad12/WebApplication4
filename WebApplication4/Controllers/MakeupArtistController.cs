@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using WeddingGo.Models;
 using WeddingGo.Models.Repositery;
@@ -14,8 +10,8 @@ namespace WeddingGo.Controllers
     public class MakeupArtistController : Controller
     {
 
-		IClientRepositery db;
-		public MakeupArtistController (IClientRepositery _db)
+		IClientRepositery<MakeupArtist> db;
+		public MakeupArtistController (IClientRepositery<MakeupArtist> _db)
 		{
 			db = _db;
 		}
@@ -41,7 +37,25 @@ namespace WeddingGo.Controllers
 
 			return Ok(makeup);
 		}
+        [HttpPost]
+        public void Add(MakeupArtist makeup)
+        {
+            db.Insert(makeup);
+            db.Save();
 
+        }
 
-	}
+        public void Delete(int id)
+        {
+            db.Delete(id);
+            db.Save();
+
+        }
+        public void Update(MakeupArtist makeup)
+        {
+            db.Update(makeup);
+            db.Save();
+
+        }
+    }
 }

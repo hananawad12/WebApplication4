@@ -5,11 +5,18 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-	public interface IClientRepositery
-	{
-		List<MakeupArtist> getAll();
+	public interface IClientRepositery<T> where T : class
+    {
+		List<T> getAll();
 
-		MakeupArtist getById(int id);
+		T getById(int id);
+        void Insert(T item);
+        void Update(T item);
+        void Delete(int ID);
+        void Save();
+        bool ItemExists(int id);
+        
 
-	}
+
+    }
 }
