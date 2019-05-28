@@ -8,10 +8,17 @@ namespace WeddingGo.Models
 {
 	public class Photographer
 	{
-		public int Id { get; set; }
-		[ForeignKey("Client")]
-		public int PhotographerId { get; set; }
-		public virtual Client Client { get; set; }
+        public int Id { get; set; }
 
-	}
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public int Phone { get; set; }
+        public int Rating { get; set; }
+        public string Image { get; set; }
+        public int Password { get; set; }
+        public string Description { get; set; }
+
+
+        public virtual ICollection<Package> Packages { get; set; }
+    }
 }

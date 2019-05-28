@@ -8,12 +8,15 @@ namespace WeddingGo.Models
 	public class Package
 	{
 		public int Id { get; set; }
-		public string  Nmae { get; set; }
+		public string  Name { get; set; }
 		public string Details { get; set; }
 		public decimal Price { get; set; }
 
-		//public virtual int MakeupArtistId  { get; set; }
-		public virtual Client Client { get; set; }
+		public virtual MakeupArtist MakeupArtist { get; set; }
+        public virtual Photographer Photographer { get; set; }
+        public virtual WeddingHall WeddingHall { get; set; }
+        public virtual Atelier Atelier { get; set; }
 
-	}
+
+    }
 }

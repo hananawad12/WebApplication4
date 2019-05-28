@@ -20,8 +20,7 @@ namespace WeddingGo.Models.Repositery
         {
             MakeupArtist makeup = db.MakeupArtists.Find(ID);
             db.MakeupArtists.Remove(makeup);
-            Client makeup2 = db.Clients.Find(ID);
-            db.Clients.Remove(makeup2);
+           
         }
 
         public List<MakeupArtist> getAll()
@@ -33,13 +32,12 @@ namespace WeddingGo.Models.Repositery
 
 		public MakeupArtist getById(int id)
 		{
-			return db.MakeupArtists/*.Include(m=>m.Packages)*/.FirstOrDefault(t=>t.Client.Id==id);
+			return db.MakeupArtists/*.Include(m=>m.Packages)*/.FirstOrDefault(t=>t.Id==id);
 		}    
 
-        public void Insert(Client item)
+        public void Insert(MakeupArtist item)
         {
-            db.Clients.Add(item);
-            db.MakeupArtists.Add(new MakeupArtist() { MakeupArtistId = item.Id });
+            db.MakeupArtists.Add(item);
 
         }
 
