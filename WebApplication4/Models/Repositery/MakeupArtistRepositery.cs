@@ -19,18 +19,16 @@ namespace WeddingGo.Models.Repositery
         public void Delete(int ID)
         {
             MakeupArtist makeup = db.MakeupArtists.Find(ID);
-            db.MakeupArtists.Remove(makeup);
-           
+            db.Entry(makeup).State = EntityState.Deleted;
+
         }
 
-        public List<MakeupArtist> getAll()
+        public List<MakeupArtist> GetAll()
 		{
-
-			return db.MakeupArtists.ToList();
-            
+			return db.MakeupArtists.ToList();   
         }
 
-		public MakeupArtist getById(int id)
+		public MakeupArtist GetById(int id)
 		{
 			return db.MakeupArtists/*.Include(m=>m.Packages)*/.FirstOrDefault(t=>t.Id==id);
 		}    
@@ -49,7 +47,8 @@ namespace WeddingGo.Models.Repositery
 
         public void Update(MakeupArtist item)
         {
-            db.Entry(item).State = EntityState.Modified;
+            
+                db.Entry(item).State = EntityState.Modified;
         }
 
         protected virtual void Dispose(bool disposing)

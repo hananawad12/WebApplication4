@@ -7,9 +7,9 @@ namespace WeddingGo.Models.Repositery
 {
 	public interface IClientRepositery<T> where T : class
     {
-		List<T> getAll();
+		List<T> GetAll();
 
-		T getById(int id);
+		T GetById(int id);
         void Insert(T item);
         void Update(T item);
         void Delete(int ID);

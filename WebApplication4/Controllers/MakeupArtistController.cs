@@ -7,7 +7,8 @@ namespace WeddingGo.Controllers
 {
     [Produces("application/json")]
     [Route("api/MakeupArtist")]
-    public class MakeupArtistController : Controller
+   
+    public class MakeupArtistController : ControllerBase
     {
 
 		IClientRepositery<MakeupArtist> db;
@@ -17,44 +18,79 @@ namespace WeddingGo.Controllers
 		}
 
 		[HttpGet]
-		public List<MakeupArtist> Get()
+		public IActionResult Get()
 		{
 
-			List<MakeupArtist> makeupArtists = db.getAll();
+			List<MakeupArtist> makeupArtists = db.GetAll();
+
+            if (makeupArtists.Count > 0)
+                return Ok(makeupArtists);
+            else
+                return NotFound();
 
 
-			return makeupArtists;
-		}
-
-
-		[HttpGet("{id}")]
-		public IActionResult  GetById( int id)
-		{
-			MakeupArtist makeup = db.getById(id);
-
-			if (makeup == null)
-				return NotFound();
-
-			return Ok(makeup);
-		}
-        [HttpPost]
-        public void Add(MakeupArtist makeup)
-        {
-            db.Insert(makeup);
-            db.Save();
 
         }
 
-        public void Delete(int id)
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
         {
-            db.Delete(id);
-            db.Save();
+            MakeupArtist makeup = db.GetById(id);
+
+            if (makeup == null)
+                return NotFound();
+
+            return Ok(makeup);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody]MakeupArtist makeup)
+        {
+            if (makeup == null)
+                return NotFound();
+           
+            else
+            {
+                db.Insert(makeup);
+                db.Save();
+                return StatusCode(201);
+            }
 
         }
-        public void Update(MakeupArtist makeup)
+        [HttpGet]
+        [Route("delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            db.Update(makeup);
-            db.Save();
+            MakeupArtist makeup = db.GetById(id);
+
+            if (makeup == null)
+                return NotFound();
+
+            else
+            {
+                db.Delete(id);
+                db.Save();
+                return StatusCode(200);
+            }
+      
+        }
+        [HttpPost("update")]
+        public IActionResult Update([FromBody]MakeupArtist makeup)
+        {
+
+            if (makeup == null)
+                return BadRequest();
+            
+            else
+            {
+                db.Update(makeup);
+                db.Save();
+                return StatusCode(200);
+                
+                   
+            }
+
 
         }
     }
