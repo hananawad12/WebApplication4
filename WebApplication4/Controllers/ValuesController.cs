@@ -2,20 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WeddingGo.Controllers
 {
 	[Route("api/[controller]")]
-	public class ValuesController : Controller
+    [Authorize]
+    public class ValuesController : Controller
 	{
-		// GET api/values
-		[HttpGet]
+        // GET api/values
+        [AllowAnonymous]
+        [HttpGet]
 		public IEnumerable<string> Get()
 		{
 			return new string[] { "value1", "value2" };
 		}
-
 		// GET api/values/5
 		[HttpGet("{id}")]
 		public string Get(int id)

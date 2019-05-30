@@ -32,12 +32,27 @@ namespace WeddingGo.Models.Repositery
             throw new NotImplementedException();
         }
 
+        public Task<Atelier> Login(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Atelier> Register(Atelier user, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Save()
         {
             throw new NotImplementedException();
         }
 
         public void Update(Atelier item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UserExists(string username)
         {
             throw new NotImplementedException();
         }

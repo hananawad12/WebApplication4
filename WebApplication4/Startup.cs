@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 using WeddingGo.Models;
 using WeddingGo.Models.Repositery;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WeddingGo
 
@@ -35,13 +38,26 @@ namespace WeddingGo
 			services.AddMvc();
 
 			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
-			//services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
 
-			//services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
 
-			//services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
 
-		}
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration
+                    .GetSection("AppSettings:Token").Value)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+        }
 
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +68,8 @@ namespace WeddingGo
 				app.UseDeveloperExceptionPage();
 			}
 
-			app.UseMvc();
-		}
+            app.UseAuthentication();
+            app.UseMvc();
+        }
 	}
 }

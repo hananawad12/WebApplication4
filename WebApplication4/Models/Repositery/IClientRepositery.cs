@@ -15,7 +15,12 @@ namespace WeddingGo.Models.Repositery
         void Delete(int ID);
         void Save();
         bool ItemExists(int id);
-        
+
+        //token
+        Task<T> Register(T user, string password);
+        Task<T> Login(string username, string password);
+        Task<bool> UserExists(string username);
+
 
 
     }
