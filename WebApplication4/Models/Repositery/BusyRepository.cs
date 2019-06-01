@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,39 +8,70 @@ namespace WeddingGo.Models.Repositery
 {
     public class BusyRepository : IRepository<Busy>
     {
+        private bool disposed = false;
+
+        private readonly WeddingContext db;
+        public BusyRepository(WeddingContext _db)
+        {
+            db = _db;
+        }
+
+
         public void Delete(int ID)
         {
-            throw new NotImplementedException();
+            Busy busy = db.Busies.Find(ID);
+            db.Entry(busy).State = EntityState.Deleted;
+
         }
 
         public List<Busy> GetAll()
         {
-            throw new NotImplementedException();
+            return db.Busies.ToList();
         }
 
         public Busy GetById(int id)
         {
-            throw new NotImplementedException();
+            return db.Busies.FirstOrDefault(t => t.Id == id);
         }
 
         public void Insert(Busy item)
         {
-            throw new NotImplementedException();
+            db.Busies.Add(item);
+
         }
 
-        public bool ItemExists(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Update(Busy item)
         {
-            throw new NotImplementedException();
+
+            db.Entry(item).State = EntityState.Modified;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public bool ItemExists(int id)
+        {
+            return db.Busies.Count(e => e.Id == id) > 0;
         }
     }
 }
