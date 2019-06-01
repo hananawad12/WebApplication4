@@ -60,11 +60,7 @@ namespace WeddingGo
 
             services.AddScoped<IRepository<Like>, LikeRepository>();
 
-
-
-
-
-
+            ///Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -77,6 +73,9 @@ namespace WeddingGo
                 };
             });
 
+            ///Help of API
+            
+            
         }
 
 
@@ -87,8 +86,13 @@ namespace WeddingGo
 			{
 				app.UseDeveloperExceptionPage();
 			}
+            ///Help of API
 
+
+            ///Authentication
             app.UseAuthentication();
+
+            ///MVC
             app.UseMvc();
         }
 	}
