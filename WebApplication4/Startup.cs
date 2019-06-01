@@ -50,9 +50,22 @@ namespace WeddingGo
 
 			services.AddScoped<IRepository<Offer>, OfferRepository>();
 
+            services.AddScoped<IRepository<Message>, MessageRepository>();
+
+            services.AddScoped<IRepository<Busy>, BusyRepository>();
+
+            services.AddScoped<IRepository<Post>, PostRepository>();
+
+            services.AddScoped<IRepository<Comment>, CommentRepository>();
+
+            services.AddScoped<IRepository<Like>, LikeRepository>();
 
 
-			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+
+
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
