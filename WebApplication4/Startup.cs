@@ -46,8 +46,13 @@ namespace WeddingGo
 
             services.AddScoped<IClientRepositery<User>, UserRepository>();
 
+			services.AddScoped<IRepository<Package>, PackageRepositery>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+			services.AddScoped<IRepository<Offer>, OfferRepository>();
+
+
+
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {

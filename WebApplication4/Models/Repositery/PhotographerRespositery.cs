@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WeddingGo.Models.Repositery
 {
     public class PhotographerRespositery:IClientRepositery<Photographer>
-    {
+	{
         private bool disposed = false;
 
         private readonly WeddingContext db;

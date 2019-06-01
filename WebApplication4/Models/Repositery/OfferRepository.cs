@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-	public class PackageRepositery:IRepository<Package>
+	public class OfferRepository : IRepository<Offer>
 	{
 		WeddingContext db;
-		public PackageRepositery(WeddingContext _db)
+		public OfferRepository(WeddingContext _db)
 		{
 			db = _db;
 		}
@@ -18,17 +18,17 @@ namespace WeddingGo.Models.Repositery
 			throw new NotImplementedException();
 		}
 
-		public List<Package> GetAll()
+		public List<Offer> GetAll()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Package GetById(int id)
+		public Offer GetById(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public void Insert(Package item)
+		public void Insert(Offer item)
 		{
 			throw new NotImplementedException();
 		}
@@ -43,11 +43,9 @@ namespace WeddingGo.Models.Repositery
 			throw new NotImplementedException();
 		}
 
-		public void Update(Package item)
+		public void Update(Offer item)
 		{
 			throw new NotImplementedException();
 		}
 	}
-
-	
 }

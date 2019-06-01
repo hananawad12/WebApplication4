@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-	public class MakeupArtistRepositery : IClientRepositery<MakeupArtist>
+	public class MakeupArtistRepositery : IClientRepositery<MakeupArtist>,IRepository<MakeupArtist>
 	{
         private bool disposed = false;
 
