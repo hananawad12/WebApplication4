@@ -15,6 +15,7 @@ using WeddingGo.Models.Repositery;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace WeddingGo
 
@@ -74,6 +75,11 @@ namespace WeddingGo
             });
 
             ///Help of API
+            services.AddSwaggerGen(s=>
+            {
+                s.SwaggerDoc("swagger1", new Info { Title = "WeddingGo API", Description = "API for our application" });
+            }
+                );
             
             
         }
@@ -89,6 +95,12 @@ namespace WeddingGo
             ///Help of API
 
 
+            app.UseSwagger();
+            app.UseSwaggerUI(s=>
+            {
+                s.SwaggerEndpoint("/swagger/swagger1/swagger.json", "my api for swagger1");
+            }
+                );
             ///Authentication
             app.UseAuthentication();
 
