@@ -13,7 +13,7 @@ namespace WeddingGo.Models
 
 		}
 
-		public DbSet<MakeupArtist> MakeupArtists { get; set; }
+		public DbSet<MakeupArtist> makeupArtists { get; set; }
 		public DbSet<Photographer> Photographers { get; set; }
 		public DbSet<Atelier> Ateliers { get; set; }
 		public DbSet<WeddingHall> WeddingHalls { get; set; }

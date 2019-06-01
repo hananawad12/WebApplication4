@@ -19,24 +19,24 @@ namespace WeddingGo.Models.Repositery
 
         public void Delete(int ID)
         {
-            MakeupArtist makeup = db.MakeupArtists.Find(ID);
+            MakeupArtist makeup = db.makeupArtists.Find(ID);
             db.Entry(makeup).State = EntityState.Deleted;
 
         }
 
         public List<MakeupArtist> GetAll()
 		{
-			return db.MakeupArtists.ToList();   
+			return db.makeupArtists.ToList();   
         }
 
 		public MakeupArtist GetById(int id)
 		{
-			return db.MakeupArtists/*.Include(m=>m.Packages)*/.FirstOrDefault(t=>t.Id==id);
+			return db.makeupArtists/*.Include(m=>m.Packages)*/.FirstOrDefault(t=>t.Id==id);
 		}    
 
         public void Insert(MakeupArtist item)
         {
-            db.MakeupArtists.Add(item);
+            db.makeupArtists.Add(item);
 
         }
 
@@ -71,7 +71,7 @@ namespace WeddingGo.Models.Repositery
 
         public bool ItemExists(int id)
         {
-            return db.MakeupArtists.Count(e => e.Id == id) > 0;
+            return db.makeupArtists.Count(e => e.Id == id) > 0;
         }
 
         //Token
@@ -85,7 +85,7 @@ namespace WeddingGo.Models.Repositery
             CreatePasswordHash(password, out PasswordHash, out PasswordSalt);
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
-            await db.MakeupArtists.AddAsync(user);
+            await db.makeupArtists.AddAsync(user);
             await db.SaveChangesAsync();
             return user;
         }
@@ -104,7 +104,7 @@ namespace WeddingGo.Models.Repositery
         public async Task<MakeupArtist> Login(string username, string password)
         {
             //return null if user is unauthorized
-            var user = await db.MakeupArtists.FirstOrDefaultAsync(u => u.Name == username);
+            var user = await db.makeupArtists.FirstOrDefaultAsync(u => u.Name == username);
             if (user == null)
                 return null;
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
@@ -130,7 +130,7 @@ namespace WeddingGo.Models.Repositery
 
         public async Task<bool> UserExists(string username)
         {
-            if (await db.MakeupArtists.AnyAsync(u => u.Name == username))
+            if (await db.makeupArtists.AnyAsync(u => u.Name == username))
                 return true;
             return false;
         }

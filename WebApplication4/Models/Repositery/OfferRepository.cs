@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ namespace WeddingGo.Models.Repositery
 {
 	public class OfferRepository : IRepository<Offer>
 	{
+		private bool disposed = false;
 		WeddingContext db;
 		public OfferRepository(WeddingContext _db)
 		{
@@ -15,37 +17,61 @@ namespace WeddingGo.Models.Repositery
 
 		public void Delete(int ID)
 		{
-			throw new NotImplementedException();
+			Offer makeup = db.Offers.Find(ID);
+			db.Entry(makeup).State = EntityState.Deleted;
+
 		}
 
 		public List<Offer> GetAll()
 		{
-			throw new NotImplementedException();
+			return db.Offers.ToList();
 		}
 
 		public Offer GetById(int id)
 		{
-			throw new NotImplementedException();
+			return db.Offers/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Offer item)
 		{
-			throw new NotImplementedException();
+			db.Offers.Add(item);
+
 		}
 
-		public bool ItemExists(int id)
-		{
-			throw new NotImplementedException();
-		}
 
 		public void Save()
 		{
-			throw new NotImplementedException();
+			db.SaveChanges();
 		}
 
 		public void Update(Offer item)
 		{
-			throw new NotImplementedException();
+
+			db.Entry(item).State = EntityState.Modified;
 		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!this.disposed)
+			{
+				if (disposing)
+				{
+					db.Dispose();
+				}
+			}
+			this.disposed = true;
+		}
+		public void Dispose()
+		{
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		public bool ItemExists(int id)
+		{
+			return db.Offers.Count(e => e.Id == id) > 0;
+		}
+
+
 	}
 }
