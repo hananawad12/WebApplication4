@@ -6,23 +6,15 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models
 {
-	public class Package
-	{
-		public int Id { get; set; }
-        [Required]
-        public string  Name { get; set; }
-        [Required]
-        public string Details { get; set; }
-        [Required]
-        public decimal Price { get; set; }
-        [DataType(DataType.Upload)]
-        public string Image { get; set; }
+    public class Busy
+    {
+        public int Id { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Day { get; set; }
 
         public virtual MakeupArtist MakeupArtist { get; set; }
         public virtual Photographer Photographer { get; set; }
         public virtual WeddingHall WeddingHall { get; set; }
         public virtual Atelier Atelier { get; set; }
-
-
     }
 }
