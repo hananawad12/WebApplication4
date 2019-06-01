@@ -38,11 +38,13 @@ namespace WeddingGo
 			services.AddMvc();
 
 			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
-            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            services.AddScoped<IClientRepositery<Photographer>, PhotographerRespositery>();
 
-            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            services.AddScoped<IClientRepositery<Atelier>, AtelierRespositery>();
 
-            //services.AddScoped<IClientRepositery, MakeupArtistRepositery>();
+            services.AddScoped<IClientRepositery<WeddingHall>, WeddingHallRespositery>();
+
+            services.AddScoped<IClientRepositery<User>, UserRepository>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

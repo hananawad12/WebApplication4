@@ -78,8 +78,8 @@ namespace WeddingGo.Models.Repositery
 
         public async Task<MakeupArtist> Register(MakeupArtist user, string password)
         {
-            byte[] PasswordHash;
-            byte[] PasswordSalt;
+            byte[] PasswordHash, PasswordSalt;
+            
             //passwordHash, passwordSalt pass ref not value type
             //use out for write only
             CreatePasswordHash(password, out PasswordHash, out PasswordSalt);

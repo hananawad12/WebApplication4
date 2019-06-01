@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-    public class PhotographerRespositery:IClientRepositery<Photographer>
+    public class UserRepository : IClientRepositery<User>
     {
         private bool disposed = false;
 
         private readonly WeddingContext db;
-        public PhotographerRespositery(WeddingContext _db)
+        public UserRepository(WeddingContext _db)
         {
             db = _db;
         }
@@ -19,34 +19,34 @@ namespace WeddingGo.Models.Repositery
 
         public void Delete(int ID)
         {
-            Photographer Photographer = db.Photographers.Find(ID);
-            db.Entry(Photographer).State = EntityState.Deleted;
+            User user = db.Users.Find(ID);
+            db.Entry(user).State = EntityState.Deleted;
 
         }
 
-        public List<Photographer> GetAll()
+        public List<User> GetAll()
         {
-            return db.Photographers.ToList();
+            return db.Users.ToList();
         }
 
-        public Photographer GetById(int id)
+        public User GetById(int id)
         {
-            return db.Photographers/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+            return db.Users/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
         }
 
-        public void Insert(Photographer item)
+        public void Insert(User item)
         {
-            db.Photographers.Add(item);
+            db.Users.Add(item);
 
         }
 
 
-        public  void Save()
+        public void Save()
         {
-             db.SaveChanges();
+            db.SaveChanges();
         }
 
-        public void Update(Photographer item)
+        public void Update(User item)
         {
 
             db.Entry(item).State = EntityState.Modified;
@@ -71,21 +71,21 @@ namespace WeddingGo.Models.Repositery
 
         public bool ItemExists(int id)
         {
-            return db.Photographers.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
 
         //Token
 
-        public async Task<Photographer> Register(Photographer user, string password)
+        public async Task<User> Register(User user, string password)
         {
-            byte[] PasswordHash;
-            byte[] PasswordSalt;
+            byte[] PasswordHash, PasswordSalt;
+
             //passwordHash, passwordSalt pass ref not value type
             //use out for write only
             CreatePasswordHash(password, out PasswordHash, out PasswordSalt);
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
-            await db.Photographers.AddAsync(user);
+            await db.Users.AddAsync(user);
             await db.SaveChangesAsync();
             return user;
         }
@@ -101,10 +101,10 @@ namespace WeddingGo.Models.Repositery
             }
         }
 
-        public async Task<Photographer> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
             //return null if user is unauthorized
-            var user = await db.Photographers.FirstOrDefaultAsync(u => u.Name == username);
+            var user = await db.Users.FirstOrDefaultAsync(u => u.Name == username);
             if (user == null)
                 return null;
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
@@ -130,7 +130,7 @@ namespace WeddingGo.Models.Repositery
 
         public async Task<bool> UserExists(string username)
         {
-            if (await db.Photographers.AnyAsync(u => u.Name == username))
+            if (await db.Users.AnyAsync(u => u.Name == username))
                 return true;
             return false;
         }

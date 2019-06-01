@@ -15,35 +15,33 @@ using WeddingGo.Models.Repositery;
 namespace WeddingGo.Controllers
 {
     [Produces("application/json")]
-    [Route("api/MakeupArtist")]
-    public class MakeupArtistController : ControllerBase
+    [Route("api/Photographer")]
+    public class PhotographerController : ControllerBase
     {
-
-        private readonly IClientRepositery<MakeupArtist> db;
+        private readonly IClientRepositery<Photographer> db;
         private readonly IConfiguration config;
-		public MakeupArtistController (IClientRepositery<MakeupArtist> _db,IConfiguration _config)
-		{
-			db = _db;
-            config = _config;
-		}
 
-        /// GRUD Operations
-
-        // GET: api/MakeupArtist
-        [HttpGet]
-        public IActionResult GetMakeupArtists()
+        public PhotographerController(IClientRepositery<Photographer> _db, IConfiguration _config)
         {
-            List<MakeupArtist> makeupArtists = db.GetAll();
+            db = _db;
+            config = _config;
+        }
 
-            if (makeupArtists.Count > 0)
-                return Ok(makeupArtists);
+        // GET: api/Photographer
+        [HttpGet]
+        public IActionResult GetPhotographers()
+        {
+            List<Photographer> photographers = db.GetAll();
+
+            if (photographers.Count > 0)
+                return Ok(photographers);
             else
                 return NotFound();
         }
 
-        // GET: api/MakeupArtist/5
+        // GET: api/Photographer/5
         [HttpGet("{id}")]
-        public IActionResult GetMakeupArtist([FromRoute] int id)
+        public IActionResult GetPhotographer([FromRoute] int id)
         {
 
             if (!ModelState.IsValid)
@@ -51,31 +49,31 @@ namespace WeddingGo.Controllers
                 return BadRequest(ModelState);
             }
 
-            var makeupArtist = db.GetById(id);
+            var photographer = db.GetById(id);
 
-            if (makeupArtist == null)
+            if (photographer == null)
             {
                 return NotFound();
             }
 
-            return Ok(makeupArtist);
+            return Ok(photographer);
         }
 
-        // PUT: api/MakeupArtist/5
+        // PUT: api/Photographer/5
         [HttpPut("{id}")]
-        public IActionResult PutMakeupArtist([FromRoute] int id, [FromBody] MakeupArtist makeupArtist)
+        public IActionResult PutPhotographer([FromRoute] int id, [FromBody] Photographer photographer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != makeupArtist.Id)
+            if (id != photographer.Id)
             {
                 return BadRequest();
             }
 
-            db.Update(makeupArtist);
+            db.Update(photographer);
 
             try
             {
@@ -93,35 +91,35 @@ namespace WeddingGo.Controllers
                 }
             }
 
-            return StatusCode(200);
+            return  StatusCode(200); ;
         }
 
-        // POST: api/MakeupArtist
+        // POST: api/Photographer
         [HttpPost]
-        public IActionResult PostMakeupArtist([FromBody] MakeupArtist makeupArtist)
+        public IActionResult PostPhotographer([FromBody] Photographer photographer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Insert(makeupArtist);
+            db.Insert(photographer);
             db.Save();
 
-            return StatusCode(201);
+            return  StatusCode(201); ;
         }
 
-        // DELETE: api/MakeupArtist/5
+        // DELETE: api/Photographers/5
         [HttpDelete("{id}")]
-        public IActionResult DeleteMakeupArtist([FromRoute] int id)
+        public IActionResult DeletePhotographer([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var makeupArtist = db.GetById(id);
-            if (makeupArtist == null)
+            var photographer = db.GetById(id);
+            if (photographer == null)
             {
                 return NotFound();
             }
@@ -129,48 +127,39 @@ namespace WeddingGo.Controllers
             db.Delete(id);
             db.Save();
 
-            return Ok(makeupArtist);
+            return Ok(photographer);
 
         }
-
-        ///Token
 
         [HttpPost("register")]
         //public async Task<IActionResult> Register(string username,string password)
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto UserForRegiterDto)
         {
 
-            //validate request
-            /*2-*if(!ModelState.IsValid)
-                return BadRequest(ModelState);*/
-            //[apiController] :by use this attribute you don't need to 1,2
-            //1:if username and password =null-->are converted to ""(empty string)
-            //2-if username and password are empty string
-
             UserForRegiterDto.Username = UserForRegiterDto.Username.ToLower();
 
             if (await db.UserExists(UserForRegiterDto.Username))
                 return BadRequest("username already exists ");
 
-            var userTocreate = new MakeupArtist
+            var userTocreate = new Photographer
             {
                 Name = UserForRegiterDto.Username
             };
 
-        var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
-		
-		return StatusCode(201);  //status for created
+            var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
 
-    }
-    //url:http://.../api/User/register
-    //---------------------------------------------------------
-    [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody]UserForLoginDto UserForLoginDto)
-    {
+            return StatusCode(201);  //status for created
 
-        var userFromRepo = await db.Login(UserForLoginDto.Username.ToLower(), UserForLoginDto.Password);
-        if (userFromRepo == null)
-            return Unauthorized();
+        }
+        //url:http://.../api/User/register
+        //---------------------------------------------------------
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody]UserForLoginDto UserForLoginDto)
+        {
+
+            var userFromRepo = await db.Login(UserForLoginDto.Username.ToLower(), UserForLoginDto.Password);
+            if (userFromRepo == null)
+                return Unauthorized();
             //Token contain UserId,UserName
             var claims = new[]
             {
@@ -196,8 +185,6 @@ namespace WeddingGo.Controllers
                 token = tokenHandler.WriteToken(Token)
             });
 
+        }
     }
-
-
-}
 }
