@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190608083136_updateRelationswithnada")]
+    partial class updateRelationswithnada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +55,6 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("BusyId");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("Discriminator")
@@ -82,8 +81,6 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Rating");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BusyId");
 
                     b.HasIndex("OfferId");
 
@@ -224,8 +221,6 @@ namespace WeddingGo.Migrations
 
                     b.HasIndex("AtelierId");
 
-                    b.HasIndex("Clientid");
-
                     b.HasIndex("MakeupArtistId");
 
                     b.HasIndex("PhotographerId");
@@ -339,10 +334,6 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Client", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Busy")
-                        .WithMany("Clients")
-                        .HasForeignKey("BusyId");
-
                     b.HasOne("WeddingGo.Models.Offer")
                         .WithMany("Clients")
                         .HasForeignKey("OfferId");
@@ -401,11 +392,6 @@ namespace WeddingGo.Migrations
                     b.HasOne("WeddingGo.Models.Atelier")
                         .WithMany("Packages")
                         .HasForeignKey("AtelierId");
-
-                    b.HasOne("WeddingGo.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("Clientid")
-                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WeddingGo.Models.MakeupArtist")
                         .WithMany("Packages")

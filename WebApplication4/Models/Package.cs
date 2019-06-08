@@ -18,10 +18,11 @@ namespace WeddingGo.Models
         [DataType(DataType.Upload)]
         public string Image { get; set; }
 
-        public virtual MakeupArtist MakeupArtist { get; set; }
-        public virtual Photographer Photographer { get; set; }
-        public virtual WeddingHall WeddingHall { get; set; }
-        public virtual Atelier Atelier { get; set; }
+		public int Clientid { get; set; }
+		//Clients.OfType<MakeupArtist>()
+
+		public virtual Client Client{ get; set; }
+       
 
 
     }

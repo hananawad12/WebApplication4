@@ -11,6 +11,9 @@ namespace WeddingGo.Models
 
         public virtual Post Post { get; set; }
 
+		public virtual Client Client { get; set; }
 
-    }
+
+
+	}
 }

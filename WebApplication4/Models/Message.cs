@@ -21,12 +21,9 @@ namespace WeddingGo.Models
         [Range(0, 1)]
         public int Read { get; set; }
 
-        public virtual MakeupArtist MakeupArtist { get; set; }
-        public virtual Photographer Photographer { get; set; }
-        public virtual WeddingHall WeddingHall { get; set; }
-        public virtual Atelier Atelier { get; set; }
-        public virtual User User { get; set; }
+        public virtual Client Client { get; set; }
 
 
-    }
+
+	}
 }

@@ -115,6 +115,7 @@ namespace WeddingGo.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteMakeupArtist([FromRoute] int id)
         {
+			//bool isAuthenticated = User.Identity.IsAuthenticated;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -154,8 +155,13 @@ namespace WeddingGo.Controllers
 
             var userTocreate = new MakeupArtist
             {
-                Name = UserForRegiterDto.Username
-            };
+                Name = UserForRegiterDto.Username,
+				Location = UserForRegiterDto.Location,
+				Phone = UserForRegiterDto.Phone,
+				Rating = UserForRegiterDto.Rating,
+				Description = UserForRegiterDto.Description,
+				Email = UserForRegiterDto.Email
+			};
 
         var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
 		

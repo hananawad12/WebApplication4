@@ -143,8 +143,13 @@ namespace WeddingGo.Controllers
 
             var userTocreate = new Photographer
             {
-                Name = UserForRegiterDto.Username
-            };
+                Name = UserForRegiterDto.Username,
+				Location = UserForRegiterDto.Location,
+				Phone = UserForRegiterDto.Phone,
+				Rating = UserForRegiterDto.Rating,
+				Description = UserForRegiterDto.Description,
+				Email = UserForRegiterDto.Email
+			};
 
             var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
 

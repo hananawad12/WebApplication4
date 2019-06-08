@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models
 {
-    public class Offer
-    {
-        public int Id { get; set; }
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public string Description { get; set; }
-        [DataType(DataType.Date)]
+	public class Offer
+	{
+		public int Id { get; set; }
+		[Required]
+		public string Name { get; set; }
+		[Required]
+		public string Description { get; set; }
+		[DataType(DataType.Date)]
+		[DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
+		[Display(Name= "Start Date")]
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+		[Display(Name = "End Date")]
+		public DateTime EndDate { get; set; }
         [DataType(DataType.Upload)]
         public string Image { get; set; }
 
-        public virtual MakeupArtist MakeupArtist { get; set; }
-        public virtual Photographer Photographer { get; set; }
-        public virtual WeddingHall WeddingHall { get; set; }
-        public virtual Atelier Atelier { get; set; }
+        public virtual ICollection< Client> Clients { get; set; }
 
-    }
+
+	}
 }

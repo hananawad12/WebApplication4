@@ -13,5 +13,21 @@ namespace WeddingGo.Dtos
         [Required]
         [StringLength(8, MinimumLength = 4, ErrorMessage = "you must specify password between 4 and 8 characters")]
         public string Password { get; set; }
-    }
+
+		public string Description { get; set; }
+
+		public string Email { get; set; }
+
+		[Required(ErrorMessage ="this filed is required")]
+		public string Location { get; set; }
+
+		[Required(ErrorMessage = "this filed is required")]
+		public int Phone { get; set; }
+
+		[Required(ErrorMessage = "this filed is required")]
+		public int Rating { get; set; }
+
+
+
+	}
 }

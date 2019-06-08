@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190608075904_inheratencRelation")]
+    partial class inheratencRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,6 +29,8 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("AtelierId");
 
+                    b.Property<int?>("ClientId");
+
                     b.Property<DateTime>("Day");
 
                     b.Property<int?>("MakeupArtistId");
@@ -39,6 +42,8 @@ namespace WeddingGo.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AtelierId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("MakeupArtistId");
 
@@ -53,8 +58,6 @@ namespace WeddingGo.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BusyId");
 
                     b.Property<string>("Description");
 
@@ -82,8 +85,6 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Rating");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BusyId");
 
                     b.HasIndex("OfferId");
 
@@ -324,6 +325,10 @@ namespace WeddingGo.Migrations
                         .WithMany("Busy")
                         .HasForeignKey("AtelierId");
 
+                    b.HasOne("WeddingGo.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("WeddingGo.Models.MakeupArtist")
                         .WithMany("Busy")
                         .HasForeignKey("MakeupArtistId");
@@ -339,10 +344,6 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Client", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Busy")
-                        .WithMany("Clients")
-                        .HasForeignKey("BusyId");
-
                     b.HasOne("WeddingGo.Models.Offer")
                         .WithMany("Clients")
                         .HasForeignKey("OfferId");
@@ -350,7 +351,7 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Comment", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
+                    b.HasOne("WeddingGo.Models.Client")
                         .WithMany("Comments")
                         .HasForeignKey("ClientId");
 
@@ -361,7 +362,7 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Like", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
+                    b.HasOne("WeddingGo.Models.Client")
                         .WithMany("Likes")
                         .HasForeignKey("ClientId");
 

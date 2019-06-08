@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190604092617_updateRelations")]
+    partial class updateRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,6 +29,8 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("AtelierId");
 
+                    b.Property<int?>("ClientId");
+
                     b.Property<DateTime>("Day");
 
                     b.Property<int?>("MakeupArtistId");
@@ -39,6 +42,8 @@ namespace WeddingGo.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AtelierId");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("MakeupArtistId");
 
@@ -53,8 +58,6 @@ namespace WeddingGo.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("BusyId");
 
                     b.Property<string>("Description");
 
@@ -83,8 +86,6 @@ namespace WeddingGo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusyId");
-
                     b.HasIndex("OfferId");
 
                     b.ToTable("Clients");
@@ -97,8 +98,6 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClientId");
-
                     b.Property<string>("Content")
                         .IsRequired();
 
@@ -106,11 +105,13 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("PostId");
 
+                    b.Property<int?>("UserId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -120,15 +121,15 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClientId");
-
                     b.Property<int?>("PostId");
+
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Likes");
                 });
@@ -138,6 +139,8 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("AtelierId");
+
                     b.Property<int?>("ClientId");
 
                     b.Property<string>("Content")
@@ -145,14 +148,32 @@ namespace WeddingGo.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<int?>("MakeupArtistId");
+
+                    b.Property<int?>("PhotographerId");
+
                     b.Property<int>("Read");
 
                     b.Property<string>("ReceiverId")
                         .IsRequired();
 
+                    b.Property<int?>("UserId");
+
+                    b.Property<int?>("WeddingHallId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("AtelierId");
+
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("MakeupArtistId");
+
+                    b.HasIndex("PhotographerId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("WeddingHallId");
 
                     b.ToTable("Messages");
                 });
@@ -324,6 +345,10 @@ namespace WeddingGo.Migrations
                         .WithMany("Busy")
                         .HasForeignKey("AtelierId");
 
+                    b.HasOne("WeddingGo.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("WeddingGo.Models.MakeupArtist")
                         .WithMany("Busy")
                         .HasForeignKey("MakeupArtistId");
@@ -339,10 +364,6 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Client", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Busy")
-                        .WithMany("Clients")
-                        .HasForeignKey("BusyId");
-
                     b.HasOne("WeddingGo.Models.Offer")
                         .WithMany("Clients")
                         .HasForeignKey("OfferId");
@@ -350,31 +371,51 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Comment", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
-                        .WithMany("Comments")
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("WeddingGo.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId");
+
+                    b.HasOne("WeddingGo.Models.User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Like", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
-                        .WithMany("Likes")
-                        .HasForeignKey("ClientId");
-
                     b.HasOne("WeddingGo.Models.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId");
+
+                    b.HasOne("WeddingGo.Models.User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Message", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
+                    b.HasOne("WeddingGo.Models.Atelier")
                         .WithMany("Messages")
+                        .HasForeignKey("AtelierId");
+
+                    b.HasOne("WeddingGo.Models.Client", "Client")
+                        .WithMany()
                         .HasForeignKey("ClientId");
+
+                    b.HasOne("WeddingGo.Models.MakeupArtist")
+                        .WithMany("Messages")
+                        .HasForeignKey("MakeupArtistId");
+
+                    b.HasOne("WeddingGo.Models.Photographer")
+                        .WithMany("Messages")
+                        .HasForeignKey("PhotographerId");
+
+                    b.HasOne("WeddingGo.Models.User")
+                        .WithMany("Messages")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("WeddingGo.Models.WeddingHall")
+                        .WithMany("Messages")
+                        .HasForeignKey("WeddingHallId");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Offer", b =>

@@ -12,9 +12,7 @@ namespace WeddingGo.Models
         [DataType(DataType.Date)]
         public DateTime Day { get; set; }
 
-        public virtual MakeupArtist MakeupArtist { get; set; }
-        public virtual Photographer Photographer { get; set; }
-        public virtual WeddingHall WeddingHall { get; set; }
-        public virtual Atelier Atelier { get; set; }
-    }
+        public virtual ICollection<Client> Clients { get; set; }
+
+	}
 }

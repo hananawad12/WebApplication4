@@ -40,12 +40,10 @@ namespace WeddingGo
 
 			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
             services.AddScoped<IClientRepositery<Photographer>, PhotographerRespositery>();
-
             services.AddScoped<IClientRepositery<Atelier>, AtelierRespositery>();
-
             services.AddScoped<IClientRepositery<WeddingHall>, WeddingHallRespositery>();
-
             services.AddScoped<IClientRepositery<User>, UserRepository>();
+
 
 			services.AddScoped<IRepository<Package>, PackageRepositery>();
 
@@ -74,15 +72,21 @@ namespace WeddingGo
                 };
             });
 
-            ///Help of API
-            services.AddSwaggerGen(s=>
-            {
-                s.SwaggerDoc("swagger1", new Info { Title = "WeddingGo API", Description = "API for our application" });
-            }
-                );
-            
-            
-        }
+			services.AddCors(options =>
+			{
+				options.AddPolicy("AllowOrigin",
+					builder => builder.AllowAnyOrigin());
+			});
+
+			///Help of API
+			services.AddSwaggerGen(s=>
+			{
+				s.SwaggerDoc("swagger1", new Info { Title = "WeddingGo API", Description = "API for our application" });
+			}
+               );
+
+
+		}
 
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,20 +96,21 @@ namespace WeddingGo
 			{
 				app.UseDeveloperExceptionPage();
 			}
-            ///Help of API
+			///Help of API
 
 
-            app.UseSwagger();
-            app.UseSwaggerUI(s=>
-            {
-                s.SwaggerEndpoint("/swagger/swagger1/swagger.json", "my api for swagger1");
-            }
-                );
-            ///Authentication
-            app.UseAuthentication();
-
-            ///MVC
-            app.UseMvc();
+			app.UseSwagger();
+			app.UseSwaggerUI(s =>
+			{
+				s.SwaggerEndpoint("/swagger/swagger1/swagger.json", "my api for swagger1");
+			}
+				);
+			///Authentication
+			app.UseAuthentication();
+			app.UseCors(builder =>
+			 builder.AllowAnyOrigin());
+			///MVC
+			app.UseMvc();
         }
 	}
 }
