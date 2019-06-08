@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,39 +8,70 @@ namespace WeddingGo.Models.Repositery
 {
     public class LikeRepository : IRepository<Like>
     {
+        private bool disposed = false;
+
+        WeddingContext db;
+        public LikeRepository(WeddingContext _db)
+        {
+            db = _db;
+        }
+
         public void Delete(int ID)
         {
-            throw new NotImplementedException();
+            Like makeup = db.Likes.Find(ID);
+            db.Entry(makeup).State = EntityState.Deleted;
+
         }
 
         public List<Like> GetAll()
         {
-            throw new NotImplementedException();
+            return db.Likes.ToList();
         }
 
         public Like GetById(int id)
         {
-            throw new NotImplementedException();
+            return db.Likes/*.Include(m=>m.Likes)*/.FirstOrDefault(t => t.Id == id);
         }
 
         public void Insert(Like item)
         {
-            throw new NotImplementedException();
+            db.Likes.Add(item);
+
         }
 
-        public bool ItemExists(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            db.SaveChanges();
         }
 
         public void Update(Like item)
         {
-            throw new NotImplementedException();
+
+            db.Entry(item).State = EntityState.Modified;
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public bool ItemExists(int id)
+        {
+            return db.Likes.Count(e => e.Id == id) > 0;
+        }
+
     }
 }
