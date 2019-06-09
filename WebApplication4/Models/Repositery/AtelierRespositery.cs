@@ -31,7 +31,7 @@ namespace WeddingGo.Models.Repositery
 
 		public Atelier GetById(int id)
 		{
-			return db.Clients.OfType<Atelier>()/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Clients.OfType<Atelier>()/*.Include(m => m.Packages)*/.FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Atelier item)

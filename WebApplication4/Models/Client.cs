@@ -17,8 +17,8 @@ namespace WeddingGo.Models
 		[Required(ErrorMessage = "this filed is required")]
 		public int Phone { get; set; }
 		public string Email { get; set; }
-		[Required(ErrorMessage = "this filed is required")]
-		public int Rating { get; set; }
+		//[Required(ErrorMessage = "this filed is required")]
+		public int? Rating { get; set; }
 		public byte[] PasswordHash { get; set; }
 		public byte[] PasswordSalt { get; set; }
 		public string Description { get; set; }

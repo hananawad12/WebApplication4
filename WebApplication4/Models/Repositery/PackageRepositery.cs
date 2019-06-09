@@ -28,7 +28,12 @@ namespace WeddingGo.Models.Repositery
 			return db.Packages.ToList();
 		}
 
-		public Package GetById(int id)
+        public List<Package> GetSpecific(int ID)
+        {
+            return db.Packages.Where(i => i.Client.Id == ID).ToList();
+        }
+
+        public Package GetById(int id)
 		{
 			return db.Packages/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
 		}

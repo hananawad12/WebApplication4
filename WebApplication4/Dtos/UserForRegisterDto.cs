@@ -24,7 +24,7 @@ namespace WeddingGo.Dtos
 		[Required(ErrorMessage = "this filed is required")]
 		public int Phone { get; set; }
 
-		[Required(ErrorMessage = "this filed is required")]
+		//[Required(ErrorMessage = "this filed is required")]
 		public int Rating { get; set; }
 
 

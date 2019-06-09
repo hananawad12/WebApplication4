@@ -15,12 +15,12 @@ namespace WeddingGo.Controllers
     [Route("api/Offer")]
     public class OfferController : ControllerBase
     {
-		private readonly IClientRepositery<Offer> db;
-		private readonly IConfiguration config;
-		public OfferController(IClientRepositery<Offer> _db, IConfiguration _config)
+		private readonly IRepository<Offer> db;
+		
+		public OfferController(IRepository<Offer> _db)
 		{
 			db = _db;
-			config = _config;
+			
 		}
 
 		/// GRUD Operations

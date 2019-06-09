@@ -15,12 +15,12 @@ namespace WeddingGo.Controllers
     [Route("api/Comment")]
     public class CommentController : ControllerBase
     {
-        private readonly IClientRepositery<Comment> db;
-        private readonly IConfiguration config;
-        public CommentController(IClientRepositery<Comment> _db, IConfiguration _config)
+        private readonly IRepository<Comment> db;
+        
+        public CommentController(IRepository<Comment> _db)
         {
             db = _db;
-            config = _config;
+           
         }
 
         /// GRUD Operations

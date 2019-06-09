@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190608215929_packageupdate")]
+    partial class packageupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,6 +74,8 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("OfferId");
 
+                    b.Property<int?>("PackageId");
+
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
@@ -86,6 +89,8 @@ namespace WeddingGo.Migrations
                     b.HasIndex("BusyId");
 
                     b.HasIndex("OfferId");
+
+                    b.HasIndex("PackageId");
 
                     b.ToTable("Clients");
 
@@ -202,8 +207,6 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("AtelierId");
 
-                    b.Property<int?>("ClientId");
-
                     b.Property<string>("Details")
                         .IsRequired();
 
@@ -223,8 +226,6 @@ namespace WeddingGo.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AtelierId");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("MakeupArtistId");
 
@@ -346,6 +347,10 @@ namespace WeddingGo.Migrations
                     b.HasOne("WeddingGo.Models.Offer")
                         .WithMany("Clients")
                         .HasForeignKey("OfferId");
+
+                    b.HasOne("WeddingGo.Models.Package")
+                        .WithMany("Clients")
+                        .HasForeignKey("PackageId");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Comment", b =>
@@ -401,10 +406,6 @@ namespace WeddingGo.Migrations
                     b.HasOne("WeddingGo.Models.Atelier")
                         .WithMany("Packages")
                         .HasForeignKey("AtelierId");
-
-                    b.HasOne("WeddingGo.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
 
                     b.HasOne("WeddingGo.Models.MakeupArtist")
                         .WithMany("Packages")

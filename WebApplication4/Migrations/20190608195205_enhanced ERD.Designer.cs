@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190608195205_enhanced ERD")]
+    partial class enhancedERD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,7 +80,7 @@ namespace WeddingGo.Migrations
 
                     b.Property<int>("Phone");
 
-                    b.Property<int?>("Rating");
+                    b.Property<int>("Rating");
 
                     b.HasKey("Id");
 
@@ -202,7 +203,7 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("AtelierId");
 
-                    b.Property<int?>("ClientId");
+                    b.Property<int>("Clientid");
 
                     b.Property<string>("Details")
                         .IsRequired();
@@ -224,7 +225,7 @@ namespace WeddingGo.Migrations
 
                     b.HasIndex("AtelierId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("Clientid");
 
                     b.HasIndex("MakeupArtistId");
 
@@ -404,7 +405,8 @@ namespace WeddingGo.Migrations
 
                     b.HasOne("WeddingGo.Models.Client", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("Clientid")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WeddingGo.Models.MakeupArtist")
                         .WithMany("Packages")

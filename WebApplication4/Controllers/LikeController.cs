@@ -15,12 +15,12 @@ namespace WeddingGo.Controllers
     [Route("api/Like")]
     public class LikeController : ControllerBase
     {
-        private readonly IClientRepositery<Like> db;
-        private readonly IConfiguration config;
-        public LikeController(IClientRepositery<Like> _db, IConfiguration _config)
+        private readonly IRepository<Like> db;
+       
+        public LikeController(IRepository<Like> _db)
         {
             db = _db;
-            config = _config;
+            
         }
 
         /// GRUD Operations
