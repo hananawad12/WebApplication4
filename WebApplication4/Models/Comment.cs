@@ -18,5 +18,8 @@ namespace WeddingGo.Models
 
 		public virtual Client Client { get; set; }
 
+
+      
+
 	}
 }

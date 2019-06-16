@@ -28,10 +28,10 @@ namespace WeddingGo.Models.Repositery
 			return db.Packages.ToList();
 		}
 
-        public List<Package> GetSpecific(int ID)
-        {
-            return db.Packages.Where(i => i.Client.Id == ID).ToList();
-        }
+        //public List<Package> GetSpecific(int ID)
+        //{
+        //    return db.Packages.Where(i => i.Client.Id == ID).ToList();
+        //}
 
         public Package GetById(int id)
 		{

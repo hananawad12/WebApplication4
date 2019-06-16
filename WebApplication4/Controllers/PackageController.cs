@@ -49,7 +49,7 @@ namespace WeddingGo.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var Packages = dbp.GetSpecific(id);
+			var Packages = dbp.GetAll();
 
 
 			if (Packages == null)

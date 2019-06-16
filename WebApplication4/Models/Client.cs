@@ -28,6 +28,14 @@ namespace WeddingGo.Models
 		public virtual ICollection<Message> Messages { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Like> Likes { get; set; }
+
+
+        public Client()
+        {
+            Messages = new HashSet<Message>();
+            Comments = new HashSet<Comment>();
+            Likes = new HashSet<Like>();
+        }
 	}
 
 }

@@ -19,11 +19,16 @@ namespace WeddingGo.Models
         public string Image { get; set; }
 
 
-        //public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
 
-        public virtual Client Client{ get; set; }
-       
 
+
+
+
+        public Package()
+        {
+            Clients = new HashSet<Client>();
+        }
 
     }
 }

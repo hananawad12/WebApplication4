@@ -14,8 +14,18 @@ namespace WeddingGo.Models
 		public virtual ICollection<Post> Posts { get; set; }
 
 		public virtual ICollection<Offer> Offers { get; set; }
-        public virtual ICollection<Busy> Busy { get; set; }
-       // public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Busy> Busies { get; set; }
+
+
+        public WeddingHall()
+        {
+            Packages = new HashSet<Package>();
+            Posts = new HashSet<Post>();
+            Busies = new HashSet<Busy>();
+            Offers = new HashSet<Offer>();
+        }
+
+
 
 
 
