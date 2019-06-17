@@ -36,7 +36,9 @@ namespace WeddingGo
 		{
 			services.AddDbContext<WeddingContext>(option => option.UseSqlServer(Configuration.GetConnectionString("Weddingcon")));
 
-			services.AddMvc();
+			
+
+			services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
             services.AddScoped<IClientRepositery<Photographer>, PhotographerRespositery>();

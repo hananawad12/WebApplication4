@@ -9,14 +9,22 @@ namespace WeddingGo.Models
 	public abstract class Client
 	{
 		public int Id { get; set; }
+
 		[Required(ErrorMessage = "this filed is required")]
 		public string Name { get; set; }
+
 		[Required(ErrorMessage = "this filed is required")]
 		public string Location { get; set; }
 
 		[Required(ErrorMessage = "this filed is required")]
 		public int Phone { get; set; }
+
 		public string Email { get; set; }
+
+
+
+
+
 		[Required(ErrorMessage = "this filed is required")]
 		public int Rating { get; set; }
 		public byte[] PasswordHash { get; set; }

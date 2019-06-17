@@ -26,12 +26,12 @@ namespace WeddingGo.Models.Repositery
 
 		public List<MakeupArtist> GetAll()
 		{
-			return db.Clients.OfType<MakeupArtist>().ToList();
+			return db.Clients.Include(ww=>ww.Messages).OfType<MakeupArtist>().Include(q=>q.Packages).ToList();
 		}
 
 		public MakeupArtist GetById(int id)
 		{
-			return db.Clients.OfType<MakeupArtist>()/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Clients.OfType<MakeupArtist>().Include(m=>m.Packages).FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(MakeupArtist item)
