@@ -28,6 +28,10 @@ namespace WeddingGo.Dtos
 		public int Rating { get; set; }
 
 
+        [Required(ErrorMessage = "this filed is required")]
+        public string Type { get; set; }
 
-	}
+
+
+    }
 }

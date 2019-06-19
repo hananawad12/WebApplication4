@@ -24,8 +24,12 @@ namespace WeddingGo.Models
 		public string Description { get; set; }
 		[DataType(DataType.Upload)]
 		public string Image { get; set; }
+        [Required(ErrorMessage = "this filed is required")]
+        public string Type { get; set; }
 
-		public virtual ICollection<Message> Messages { get; set; }
+
+
+        public virtual ICollection<Message> Messages { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Like> Likes { get; set; }
 

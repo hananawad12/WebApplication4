@@ -113,7 +113,7 @@ namespace WeddingGo
 			///Authentication
 			app.UseAuthentication();
 			app.UseCors(builder =>
-			 builder.AllowAnyOrigin());
+			 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 			///MVC
 			app.UseMvc();
         }
