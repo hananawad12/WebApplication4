@@ -26,6 +26,12 @@ namespace WeddingGo.Models
 
         public virtual ICollection< Client> Clients { get; set; }
 
+        public Offer()
+        {
+            
+            Clients = new HashSet<Client>();
+        }
+
 
 	}
 }

@@ -16,13 +16,13 @@ namespace WeddingGo.Controllers
     [Route("api/Message")]
     public class MessageController : ControllerBase
     {
-        private readonly IClientRepositery<Message> db;
-        private readonly IConfiguration config;
+        private readonly IRepository<Message> db;
+       
 
-        public MessageController(IClientRepositery<Message> _db, IConfiguration _config)
+        public MessageController(IRepository<Message> _db)
         {
             db = _db;
-            config = _config;
+            
         }
 
         // GET: api/Message

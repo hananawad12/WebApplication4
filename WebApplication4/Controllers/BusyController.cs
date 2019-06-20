@@ -15,13 +15,13 @@ namespace WeddingGo.Controllers
     [Route("api/Busy")]
     public class BusyController : ControllerBase
     {
-        private readonly IClientRepositery<Busy> db;
-        private readonly IConfiguration config;
+        private readonly IRepository<Busy> db;
+       
 
-        public BusyController(IClientRepositery<Busy> _db, IConfiguration _config)
+        public BusyController(IRepository<Busy> _db)
         {
             db = _db;
-            config = _config;
+           
         }
 
         // GET: api/Busy

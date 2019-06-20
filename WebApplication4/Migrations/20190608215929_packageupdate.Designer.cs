@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190608215929_packageupdate")]
+    partial class packageupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,9 +83,6 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Phone");
 
                     b.Property<int?>("Rating");
-
-                    b.Property<string>("Type")
-                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -324,19 +322,19 @@ namespace WeddingGo.Migrations
             modelBuilder.Entity("WeddingGo.Models.Busy", b =>
                 {
                     b.HasOne("WeddingGo.Models.Atelier")
-                        .WithMany("Busies")
+                        .WithMany("Busy")
                         .HasForeignKey("AtelierId");
 
                     b.HasOne("WeddingGo.Models.MakeupArtist")
-                        .WithMany("Busies")
+                        .WithMany("Busy")
                         .HasForeignKey("MakeupArtistId");
 
                     b.HasOne("WeddingGo.Models.Photographer")
-                        .WithMany("Busies")
+                        .WithMany("Busy")
                         .HasForeignKey("PhotographerId");
 
                     b.HasOne("WeddingGo.Models.WeddingHall")
-                        .WithMany("Busies")
+                        .WithMany("Busy")
                         .HasForeignKey("WeddingHallId");
                 });
 

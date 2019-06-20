@@ -27,12 +27,12 @@ namespace WeddingGo.Models.Repositery
 
 		public List<User> GetAll()
 		{
-			return db.Clients.OfType<User>().ToList();
+			return db.Clients.OfType<User>().Include(ww=>ww.Messages).Include(b=>b.Comments).ToList();
 		}
 
 		public User GetById(int id)
 		{
-			return db.Clients.OfType<User>()/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Clients.OfType<User>().Include(ww => ww.Messages).Include(b => b.Comments).FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(User item)

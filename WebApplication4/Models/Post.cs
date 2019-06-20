@@ -19,7 +19,15 @@ namespace WeddingGo.Models
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
-		//public virtual ICollection<Client> Clients { get; set; }
+
+
+
+        public Post()
+        {
+            Comments= new HashSet<Comment>();
+            Likes = new HashSet<Like>();
+           
+        }
 
 
 

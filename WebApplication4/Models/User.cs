@@ -10,12 +10,6 @@ namespace WeddingGo.Models
     {
        
 
-        //public virtual ICollection<Message> Messages { get; set; }
-        //public virtual ICollection<Comment> Comments { get; set; }
-        //public virtual ICollection<Like> Likes { get; set; }
-
-
-
 
     }
 }

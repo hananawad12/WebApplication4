@@ -26,12 +26,17 @@ namespace WeddingGo.Models.Repositery
 
 		public List<Atelier> GetAll()
 		{
-			return db.Clients.OfType<Atelier>().ToList();
+            return db.Clients.OfType<Atelier>().Include(ww => ww.Packages)
+                                                .Include( u=>u.Posts)
+                                                .Include(a=>a.Busies)
+                                                .Include(b=>b.Offers)
+                                                .ToList();
+            //return db.Clients.OfType<Atelier>().ToList();
 		}
 
 		public Atelier GetById(int id)
 		{
-			return db.Clients.OfType<Atelier>()/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Clients.OfType<Atelier>()/*.Include(m => m.Packages)*/.FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Atelier item)

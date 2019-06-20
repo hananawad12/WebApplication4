@@ -15,12 +15,10 @@ namespace WeddingGo.Controllers
     [Route("api/Post")]
     public class PostController : ControllerBase
     {
-        private readonly IClientRepositery<Post> db;
-        private readonly IConfiguration config;
-        public PostController(IClientRepositery<Post> _db, IConfiguration _config)
+        private readonly IRepository<Post> db;
+        public PostController(IRepository<Post> _db)
         {
             db = _db;
-            config = _config;
         }
 
         /// GRUD Operations

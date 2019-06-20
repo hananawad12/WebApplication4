@@ -48,8 +48,9 @@ namespace WeddingGo
 
 
 			services.AddScoped<IRepository<Package>, PackageRepositery>();
+            
 
-			services.AddScoped<IRepository<Offer>, OfferRepository>();
+            services.AddScoped<IRepository<Offer>, OfferRepository>();
 
             services.AddScoped<IRepository<Message>, MessageRepository>();
 
@@ -60,6 +61,10 @@ namespace WeddingGo
             services.AddScoped<IRepository<Comment>, CommentRepository>();
 
             services.AddScoped<IRepository<Like>, LikeRepository>();
+
+            //for testing
+            services.AddScoped<PackageRepositery, PackageRepositery>();
+
 
             ///Authentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -110,7 +115,7 @@ namespace WeddingGo
 			///Authentication
 			app.UseAuthentication();
 			app.UseCors(builder =>
-			 builder.AllowAnyOrigin());
+			 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 			///MVC
 			app.UseMvc();
         }

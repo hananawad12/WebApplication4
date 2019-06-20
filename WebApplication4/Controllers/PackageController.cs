@@ -15,12 +15,14 @@ namespace WeddingGo.Controllers
     [Route("api/Package")]
     public class PackageController : ControllerBase
     {
-		private readonly IClientRepositery<Package> db;
-		private readonly IConfiguration config;
-		public PackageController(IClientRepositery<Package> _db, IConfiguration _config)
+		private readonly IRepository<Package> db;
+        private readonly PackageRepositery dbp;
+
+        public PackageController(IRepository<Package> _db, PackageRepositery _dbp)
 		{
 			db = _db;
-			config = _config;
+            dbp = _dbp;
+			
 		}
 
 		/// GRUD Operations
@@ -47,14 +49,15 @@ namespace WeddingGo.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var Package = db.GetById(id);
+			var Packages = dbp.GetAll();
 
-			if (Package == null)
+
+			if (Packages == null)
 			{
 				return NotFound();
 			}
 
-			return Ok(Package);
+			return Ok(Packages);
 		}
 
 		// PUT: api/Package/5

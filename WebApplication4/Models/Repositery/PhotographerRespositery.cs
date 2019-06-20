@@ -26,12 +26,20 @@ namespace WeddingGo.Models.Repositery
 
 		public List<Photographer> GetAll()
 		{
-			return db.Clients.OfType<Photographer>().ToList();
-		}
+			return db.Clients.OfType<Photographer>().Include(ww => ww.Packages)
+                                                    .Include(u => u.Posts)
+                                                    .Include(a => a.Busies)
+                                                    .Include(b => b.Offers)
+                                                    .ToList();
+        }
 
 		public Photographer GetById(int id)
 		{
-			return db.Clients.OfType<Photographer>()/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Clients.OfType<Photographer>().Include(ww => ww.Packages)
+                                                    .Include(u => u.Posts)
+                                                    .Include(a => a.Busies)
+                                                    .Include(b => b.Offers)
+                                                    .FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Photographer item)
