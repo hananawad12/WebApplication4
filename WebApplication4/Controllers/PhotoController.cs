@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WeddingGo.Controllers
 {
     //[Authorize]
-    [Route("api/MakeupArtist/{MakeupArtistId/Photo}")]
+    [Route("api/MakeupArtist/{MakeupArtistId}/Photo}")]
     public class PhotoController : ControllerBase
     {
     }
