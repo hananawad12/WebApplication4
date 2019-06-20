@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,13 @@ namespace WeddingGo.Controllers
 
         private readonly IClientRepositery<MakeupArtist> db;
         private readonly IConfiguration config;
-		public MakeupArtistController (IClientRepositery<MakeupArtist> _db,IConfiguration _config)
+		private readonly IMapper _mapper;
+
+		public MakeupArtistController (IClientRepositery<MakeupArtist> _db,IConfiguration _config,IMapper mapper)
 		{
 			db = _db;
             config = _config;
+			_mapper = mapper;
 		}
 
         /// GRUD Operations
@@ -52,13 +56,14 @@ namespace WeddingGo.Controllers
             }
 
             var makeupArtist = db.GetById(id);
+			var makeupToReturn = _mapper.Map<UserForDetailed>(makeupArtist);
 
-            if (makeupArtist == null)
+            if (makeupToReturn == null)
             {
                 return NotFound();
             }
 
-            return Ok(makeupArtist);
+            return Ok(makeupToReturn);
         }
 
         // PUT: api/MakeupArtist/5

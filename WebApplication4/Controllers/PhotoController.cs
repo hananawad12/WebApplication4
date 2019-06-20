@@ -95,7 +95,7 @@ namespace WeddingGo.Controllers
             userFromRepo.Photos.Add(photo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetPhoto",new { id=photo.Id},);
+                return CreatedAtRoute("GetPhoto",new { id=photo.Id});
             //return Ok();
             else
                 return BadRequest("could not add the photo");
