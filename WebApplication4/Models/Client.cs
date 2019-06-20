@@ -22,16 +22,15 @@ namespace WeddingGo.Models
 		public byte[] PasswordHash { get; set; }
 		public byte[] PasswordSalt { get; set; }
 		public string Description { get; set; }
-		[DataType(DataType.Upload)]
-		public string Image { get; set; }
+		//[DataType(DataType.Upload)]
+		//public string Image { get; set; }
         [Required(ErrorMessage = "this filed is required")]
         public string Type { get; set; }
-
-
 
         public virtual ICollection<Message> Messages { get; set; }
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Like> Likes { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
 
 
         public Client()
@@ -39,6 +38,7 @@ namespace WeddingGo.Models
             Messages = new HashSet<Message>();
             Comments = new HashSet<Comment>();
             Likes = new HashSet<Like>();
+            Photos = new HashSet<Photo>();
         }
 	}
 

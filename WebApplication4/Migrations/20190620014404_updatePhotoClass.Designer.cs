@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190620014404_updatePhotoClass")]
+    partial class updatePhotoClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,6 +175,8 @@ namespace WeddingGo.Migrations
 
                     b.Property<DateTime>("EndDate");
 
+                    b.Property<string>("Image");
+
                     b.Property<int?>("MakeupArtistId");
 
                     b.Property<string>("Name")
@@ -239,7 +242,7 @@ namespace WeddingGo.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ClientId");
+                    b.Property<int?>("AtelierId");
 
                     b.Property<DateTime>("DateAdded");
 
@@ -247,27 +250,29 @@ namespace WeddingGo.Migrations
 
                     b.Property<bool>("IsMain");
 
-                    b.Property<int?>("OfferId");
-
-                    b.Property<int?>("PackageId");
-
-                    b.Property<int?>("PostId");
+                    b.Property<int?>("PhotographerId");
 
                     b.Property<string>("PublicId");
 
                     b.Property<string>("Url");
 
+                    b.Property<int?>("WeddingHallId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("AtelierId")
+                        .IsUnique()
+                        .HasFilter("[AtelierId] IS NOT NULL");
 
-                    b.HasIndex("OfferId");
+                    b.HasIndex("PhotographerId")
+                        .IsUnique()
+                        .HasFilter("[PhotographerId] IS NOT NULL");
 
-                    b.HasIndex("PackageId");
+                    b.HasIndex("WeddingHallId")
+                        .IsUnique()
+                        .HasFilter("[WeddingHallId] IS NOT NULL");
 
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Photos");
+                    b.ToTable("Photo");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Post", b =>
@@ -317,6 +322,11 @@ namespace WeddingGo.Migrations
                 {
                     b.HasBaseType("WeddingGo.Models.Client");
 
+                    b.Property<int?>("PhotoId");
+
+                    b.HasIndex("PhotoId")
+                        .IsUnique()
+                        .HasFilter("[PhotoId] IS NOT NULL");
 
                     b.ToTable("MakeupArtists");
 
@@ -456,21 +466,17 @@ namespace WeddingGo.Migrations
 
             modelBuilder.Entity("WeddingGo.Models.Photo", b =>
                 {
-                    b.HasOne("WeddingGo.Models.Client", "Client")
-                        .WithMany("Photos")
-                        .HasForeignKey("ClientId");
+                    b.HasOne("WeddingGo.Models.Atelier", "Atelier")
+                        .WithOne("Photo")
+                        .HasForeignKey("WeddingGo.Models.Photo", "AtelierId");
 
-                    b.HasOne("WeddingGo.Models.Offer")
-                        .WithMany("Photos")
-                        .HasForeignKey("OfferId");
+                    b.HasOne("WeddingGo.Models.Photographer", "Photographer")
+                        .WithOne("Photo")
+                        .HasForeignKey("WeddingGo.Models.Photo", "PhotographerId");
 
-                    b.HasOne("WeddingGo.Models.Package")
-                        .WithMany("Photos")
-                        .HasForeignKey("PackageId");
-
-                    b.HasOne("WeddingGo.Models.Post")
-                        .WithMany("Photos")
-                        .HasForeignKey("PostId");
+                    b.HasOne("WeddingGo.Models.WeddingHall", "WeddingHall")
+                        .WithOne("Photo")
+                        .HasForeignKey("WeddingGo.Models.Photo", "WeddingHallId");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Post", b =>
@@ -490,6 +496,13 @@ namespace WeddingGo.Migrations
                     b.HasOne("WeddingGo.Models.WeddingHall")
                         .WithMany("Posts")
                         .HasForeignKey("WeddingHallId");
+                });
+
+            modelBuilder.Entity("WeddingGo.Models.MakeupArtist", b =>
+                {
+                    b.HasOne("WeddingGo.Models.Photo", "Photo")
+                        .WithOne("MakeupArtist")
+                        .HasForeignKey("WeddingGo.Models.MakeupArtist", "PhotoId");
                 });
 #pragma warning restore 612, 618
         }

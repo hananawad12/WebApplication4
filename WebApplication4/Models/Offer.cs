@@ -21,8 +21,8 @@ namespace WeddingGo.Models
 		[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 		[Display(Name = "End Date")]
 		public DateTime EndDate { get; set; }
-        [DataType(DataType.Upload)]
-        public string Image { get; set; }
+
+        public virtual ICollection<Photo> Photos { get; set; }
 
         public virtual ICollection< Client> Clients { get; set; }
 
