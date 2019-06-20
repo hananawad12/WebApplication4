@@ -16,6 +16,7 @@ namespace WeddingGo.Models
 		public virtual ICollection<Busy> Busies { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
 
+
         public MakeupArtist()
         {
             Packages=new HashSet<Package>();

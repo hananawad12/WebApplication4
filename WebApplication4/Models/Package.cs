@@ -20,6 +20,7 @@ namespace WeddingGo.Models
 
 
         public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<Photo> Photos { get; set; }
 
 
 

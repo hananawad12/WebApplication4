@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
+using WeddingGo.Helpers;
 
 namespace WeddingGo
 
@@ -39,6 +40,9 @@ namespace WeddingGo
 			
 
 			services.AddMvc().AddJsonOptions(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            //for upload image
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
 			services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
             services.AddScoped<IClientRepositery<Photographer>, PhotographerRespositery>();
