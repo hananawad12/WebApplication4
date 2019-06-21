@@ -38,9 +38,14 @@ namespace WeddingGo.Controllers
         public IActionResult GetMakeupArtists()
         {
             List<MakeupArtist> makeupArtists = db.GetAll();
+		
+				var makeupToReturn = _mapper.Map<IEnumerable<UserForListDto>>(makeupArtists);
 
-            if (makeupArtists.Count > 0)
-                return Ok(makeupArtists);
+				if (makeupToReturn != null)
+					return Ok(makeupToReturn);
+			
+
+            
             else
                 return NotFound();
         }
@@ -160,12 +165,13 @@ namespace WeddingGo.Controllers
 
             var userTocreate = new MakeupArtist
             {
-                Name = UserForRegiterDto.Username,
+				Name = UserForRegiterDto.Username,
 				Location = UserForRegiterDto.Location,
 				Phone = UserForRegiterDto.Phone,
 				Rating = UserForRegiterDto.Rating,
 				Description = UserForRegiterDto.Description,
-				Email = UserForRegiterDto.Email
+				Email = UserForRegiterDto.Email,
+				Type = UserForRegiterDto.Type
 			};
 
         var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);

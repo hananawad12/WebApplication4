@@ -12,10 +12,19 @@ namespace WeddingGo.Helpers
 	{
 		public AutoMapperProfiles()
 		{
-            CreateMap<Photo, PhotosForDetailedDto>();
-            CreateMap<MakeupArtist, UserForDetailed>();
-            CreateMap<Photo, PhotoForReturnDto>();
-            CreateMap<PhotoForCreationDto, Photo>();
-        }		
+			CreateMap<MakeupArtist, UserForListDto>()
+				.ForMember(dest => dest.PhotoUrl, opt =>
+				{
+					opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
+				});
+				
+			CreateMap<MakeupArtist, UserForDetailed>()
+				.ForMember(dest => dest.PhotoUrl, opt =>
+				{
+					opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url);
+				});
+
+			CreateMap<Photo, PhotosForDetailedDto>();
+		}		
 	}
 }

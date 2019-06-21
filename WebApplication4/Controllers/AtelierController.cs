@@ -148,8 +148,11 @@ namespace WeddingGo.Controllers
 				Phone = UserForRegiterDto.Phone,
 				Rating = UserForRegiterDto.Rating,
 				Description = UserForRegiterDto.Description,
-				Email = UserForRegiterDto.Email
+				Email = UserForRegiterDto.Email,
+				Type= UserForRegiterDto.Type
+		
 			};
+			
 
             var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
 

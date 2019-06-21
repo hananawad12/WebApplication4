@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Dtos
 {
-	public class UserForDetailed
+	public class UserForListDto
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
@@ -14,14 +14,8 @@ namespace WeddingGo.Dtos
 		public int Phone { get; set; }
 		public string Email { get; set; }
 		public int? Rating { get; set; }
-		
+
 		public string Description { get; set; }
-		public string Type { get; set; }
 		public string PhotoUrl { get; set; }
-
-		public ICollection<PhotosForDetailedDto> Photos { get; set; }
-
-
-
 	}
 }
