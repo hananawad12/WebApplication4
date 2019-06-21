@@ -18,7 +18,7 @@ using WeddingGo.Models;
 namespace WeddingGo.Controllers
 {
     //[Authorize]
-    [Route("api/MakeupArtist/{MakeupArtistId}/Photo}")]
+    [Route("api/Atelier/{AtelierId}/Photo")]
    
     public class PhotoController : ControllerBase
     {
@@ -57,18 +57,18 @@ namespace WeddingGo.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoMakeupArtist(int MakeupArtistId,PhotoForCreationDto photoForCreationDto)
+        public async Task<IActionResult> AddPhotoAtelier(int AtelierId,PhotoForCreationDto photoForCreationDto)
         {
             //i do not understand why ???
             //not correct
-            //if (MakeupArtistId != int.Parse(MakeupArtist.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (AtelierId != int.Parse(Atelier.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             //correct
-            //if (MakeupArtistId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (AtelierId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
-            var userFromRepo = await _repo.GetClient(MakeupArtistId);
+            var userFromRepo = await _repo.GetClient(AtelierId);
             var file = photoForCreationDto.File;
             var uploadResult = new ImageUploadResult();
 

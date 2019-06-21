@@ -12,7 +12,10 @@ namespace WeddingGo.Helpers
 	{
 		public AutoMapperProfiles()
 		{
-			CreateMap<MakeupArtist, UserForDetailed>();
-		}		
+            CreateMap<Photo, PhotosForDetailedDto>();
+            CreateMap<MakeupArtist, UserForDetailed>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
+        }		
 	}
 }
