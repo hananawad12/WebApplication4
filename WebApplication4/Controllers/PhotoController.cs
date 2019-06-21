@@ -47,13 +47,13 @@ namespace WeddingGo.Controllers
 
         }
 
-        //[HttpGet("{id}",Name ="GetPhoto")]
-        //public async Task<IActionResult> GetPhoto(int id)
-        //{
-        //    var photoFromRepo = _repo.GetPhoto(id);
-        //    var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
-        //    return Ok(photo);
-        //}
+        [HttpGet("{id}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            var photoFromRepo = await _repo.GetPhoto(id);
+            var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+            return Ok(photo);
+        }
 
 
         [HttpPost]
@@ -94,9 +94,14 @@ namespace WeddingGo.Controllers
                 photo.IsMain = true;
             userFromRepo.Photos.Add(photo);
 
+
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetPhoto",new { id=photo.Id},);
-            //return Ok();
+            {
+                var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id },photoToReturn);
+                //return Ok();
+
+            }
             else
                 return BadRequest("could not add the photo");
         }
