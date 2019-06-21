@@ -47,13 +47,13 @@ namespace WeddingGo.Controllers
 
         }
 
-        [HttpGet("{id}",Name ="GetPhoto")]
-        public async Task<IActionResult> GetPhoto(int id)
-        {
-            var photoFromRepo = _repo.GetPhoto(id);
-            var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
-            return Ok(photo);
-        }
+        //[HttpGet("{id}",Name ="GetPhoto")]
+        //public async Task<IActionResult> GetPhoto(int id)
+        //{
+        //    var photoFromRepo = _repo.GetPhoto(id);
+        //    var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+        //    return Ok(photo);
+        //}
 
 
         [HttpPost]
