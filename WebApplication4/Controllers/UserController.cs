@@ -145,13 +145,14 @@ namespace WeddingGo.Controllers
 
             var userTocreate = new User
             {
-                Name = UserForRegiterDto.Username,
-				Location=UserForRegiterDto.Location,
-				Phone=UserForRegiterDto.Phone,
-				Rating=UserForRegiterDto.Rating,
-				Description=UserForRegiterDto.Description,
-				Email=UserForRegiterDto.Email
-            };
+				Name = UserForRegiterDto.Username,
+				Location = UserForRegiterDto.Location,
+				Phone = UserForRegiterDto.Phone,
+				Rating = UserForRegiterDto.Rating,
+				Description = UserForRegiterDto.Description,
+				Email = UserForRegiterDto.Email,
+				Type = UserForRegiterDto.Type
+			};
 
             var createdUser = await db.Register(userTocreate, UserForRegiterDto.Password);
 
