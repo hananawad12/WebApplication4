@@ -157,7 +157,7 @@ namespace WeddingGo.Controllers
         //---------------------------------------------------------------------------------------------------------------
         //for uploading images
         //-------------------------
-        [HttpGet("{id}", Name = "GetPhotoOffer")]
+        [HttpGet("GetPhoto/{id}")]
         public async Task<IActionResult> GetPhoto(int id)
         {
             var photoFromRepo = await _repo.GetPhoto(id);
@@ -209,7 +209,7 @@ namespace WeddingGo.Controllers
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhotoOffer", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoToReturn);
                 //return Ok();
 
             }
