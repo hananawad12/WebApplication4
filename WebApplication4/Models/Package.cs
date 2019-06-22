@@ -29,6 +29,8 @@ namespace WeddingGo.Models
         public Package()
         {
             Clients = new HashSet<Client>();
+            Photos = new HashSet<Photo>();
+
         }
 
     }

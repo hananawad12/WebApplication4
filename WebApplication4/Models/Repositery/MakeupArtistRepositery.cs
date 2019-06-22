@@ -26,8 +26,13 @@ namespace WeddingGo.Models.Repositery
 
 		public List<MakeupArtist> GetAll()
 		{
-            return db.Clients.OfType<MakeupArtist>().Include(ww=>ww.Packages).Include(ww => ww.Packages).Include(u => u.Posts).Include(a => a.Busies).Include(b => b.Offers).ToList();
-            //return db.Clients.OfType<MakeupArtist>().Where(ww => ww.Id > 0).SelectMany(ww => ww.Packages,((a,b)=>new {a.Name,b.Price }));
+            return db.Clients.OfType<MakeupArtist>().Include(ww=>ww.Packages)
+                                                    .Include(ww => ww.Packages)
+                                                    .Include(u => u.Posts)
+                                                    .Include(a => a.Busies)
+                                                    .Include(b => b.Offers)
+                                                    .Include(m => m.Photos)
+                                                    .ToList();
         }
 
 		public MakeupArtist GetById(int id)
@@ -36,6 +41,7 @@ namespace WeddingGo.Models.Repositery
                                                     .Include(u => u.Posts)
                                                     .Include(a => a.Busies)
                                                     .Include(b => b.Offers)
+                                                    .Include(m=>m.Photos)
                                                     .FirstOrDefault(t => t.Id == id);
 		}
 

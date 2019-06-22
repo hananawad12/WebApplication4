@@ -30,6 +30,7 @@ namespace WeddingGo.Models.Repositery
                                                     .Include(u => u.Posts)
                                                     .Include(a => a.Busies)
                                                     .Include(b => b.Offers)
+                                                    .Include(m => m.Photos)
                                                     .ToList();
         }
 
@@ -39,6 +40,7 @@ namespace WeddingGo.Models.Repositery
                                                     .Include(u => u.Posts)
                                                     .Include(a => a.Busies)
                                                     .Include(b => b.Offers)
+                                                    .Include(m=>m.Photos)
                                                     .FirstOrDefault(t => t.Id == id);
 		}
 

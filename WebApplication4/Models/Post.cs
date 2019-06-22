@@ -27,11 +27,13 @@ namespace WeddingGo.Models
         {
             Comments= new HashSet<Comment>();
             Likes = new HashSet<Like>();
-           
+            Photos = new HashSet<Photo>();
+
+
         }
 
 
 
 
-	}
+    }
 }

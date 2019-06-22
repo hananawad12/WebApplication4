@@ -25,7 +25,7 @@ namespace WeddingGo.Models.Repositery
 
 		public List<Package> GetAll()
 		{
-			return db.Packages.ToList();
+			return db.Packages.Include(m => m.Photos).ToList();
 		}
 
         //public List<Package> GetSpecific(int ID)
@@ -35,7 +35,7 @@ namespace WeddingGo.Models.Repositery
 
         public Package GetById(int id)
 		{
-			return db.Packages/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Packages.Include(m=>m.Photos).FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Package item)

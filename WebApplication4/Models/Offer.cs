@@ -30,8 +30,10 @@ namespace WeddingGo.Models
         {
             
             Clients = new HashSet<Client>();
+            Photos = new HashSet<Photo>();
+
         }
 
 
-	}
+    }
 }

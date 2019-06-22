@@ -24,12 +24,12 @@ namespace WeddingGo.Models.Repositery
 
 		public List<Offer> GetAll()
 		{
-			return db.Offers.ToList();
+			return db.Offers.Include(m => m.Photos).ToList();
 		}
 
 		public Offer GetById(int id)
 		{
-			return db.Offers/*.Include(m=>m.Packages)*/.FirstOrDefault(t => t.Id == id);
+			return db.Offers.Include(m=>m.Photos).FirstOrDefault(t => t.Id == id);
 		}
 
 		public void Insert(Offer item)

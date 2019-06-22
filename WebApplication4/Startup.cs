@@ -18,7 +18,6 @@ using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
 using WeddingGo.Helpers;
 using AutoMapper;
-using WeddingGo.Data;
 
 namespace WeddingGo
 
@@ -48,8 +47,6 @@ namespace WeddingGo
 
             //for upload image
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
-
-            services.AddScoped<IDatingRepository, DatingRepository>();
                
             services.AddScoped<IPhotoRepository, PhotoRepository>();
 
