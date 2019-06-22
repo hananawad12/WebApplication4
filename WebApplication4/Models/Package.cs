@@ -15,8 +15,7 @@ namespace WeddingGo.Models
         public string Details { get; set; }
         [Required]
         public decimal Price { get; set; }
-        [DataType(DataType.Upload)]
-        public string Image { get; set; }
+        
 
 
         public virtual ICollection<Client> Clients { get; set; }

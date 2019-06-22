@@ -14,8 +14,7 @@ namespace WeddingGo.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        [DataType(DataType.Upload)]
-        public string Image { get; set; }
+        
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
