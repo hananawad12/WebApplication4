@@ -50,6 +50,8 @@ namespace WeddingGo
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
             services.AddScoped<IDatingRepository, DatingRepository>();
+               
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
 
             services.AddScoped<IClientRepositery<MakeupArtist>, MakeupArtistRepositery>();
             services.AddScoped<IClientRepositery<Photographer>, PhotographerRespositery>();
