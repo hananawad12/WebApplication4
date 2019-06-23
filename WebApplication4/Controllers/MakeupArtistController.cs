@@ -163,6 +163,44 @@ namespace WeddingGo.Controllers
 
         }
 
+        [HttpGet("SearchByName/{name}")]
+        public IActionResult GetMakeupAtrists([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            List<MakeupArtist> MakeupAtrists = db.GetByName(name);
+
+            if (MakeupAtrists.Count > 0)
+                return Ok(MakeupAtrists);
+            else
+                return NotFound();
+
+            
+
+        }
+
+        [HttpGet("SearchByFullName/{name}")]
+        public IActionResult GetMakeupAtrist([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var MakeupAtrist = db.GetByFullName(name);
+
+            if (MakeupAtrist == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(MakeupAtrist);
+        }
+
         ///Token
 
         [HttpPost("register")]
@@ -252,11 +290,11 @@ namespace WeddingGo.Controllers
         {
             //i do not understand why ???
             //not correct
-            //if (AtelierId != int.Parse(Atelier.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (MakeupAtristId != int.Parse(MakeupAtrist.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             //correct
-            //if (AtelierId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (MakeupAtristId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             var userFromRepo = db.GetById(MakeupArtistId);

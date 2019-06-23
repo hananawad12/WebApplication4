@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190623230949_add price column to offer")]
+    partial class addpricecolumntooffer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,7 +522,7 @@ namespace WeddingGo.Migrations
                         .HasForeignKey("OffersId");
 
                     b.HasOne("WeddingGo.Models.Package", "Packages")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("PackagesId");
 
                     b.HasOne("WeddingGo.Models.User", "Users")

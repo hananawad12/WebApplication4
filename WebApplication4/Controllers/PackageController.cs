@@ -23,6 +23,7 @@ namespace WeddingGo.Controllers
     {
 		private readonly IRepository<Package> db;
         private readonly PackageRepositery dbp;
+        private readonly IPriceRepository<Package> dbpp;
         private readonly IConfiguration config;
         private readonly IPhotoRepository _repo;
         private readonly IMapper _mapper;
@@ -30,10 +31,11 @@ namespace WeddingGo.Controllers
         private Cloudinary _cloudinary;
 
 
-        public PackageController(IRepository<Package> _db, PackageRepositery _dbp, IConfiguration _config, IPhotoRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
+        public PackageController(IRepository<Package> _db,IPriceRepository<Package> _dbpp, PackageRepositery _dbp, IConfiguration _config, IPhotoRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
 		{
 			db = _db;
             dbp = _dbp;
+            dbpp = _dbpp;
             config = _config;
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
@@ -74,15 +76,15 @@ namespace WeddingGo.Controllers
 				return BadRequest(ModelState);
 			}
 
-			var Packages = dbp.GetAll();
+			var Package = dbp.GetById(id);
 
 
-			if (Packages == null)
+			if (Package == null)
 			{
 				return NotFound();
 			}
 
-			return Ok(Packages);
+			return Ok(Package);
 		}
 
 		// PUT: api/Package/5
@@ -156,6 +158,27 @@ namespace WeddingGo.Controllers
 			return Ok(Package);
 
 		}
+
+
+        [HttpGet("SearchByPrice/{price}")]
+        public IActionResult GetPackage([FromRoute] decimal price)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var package = dbpp.SearchPrice(price);
+
+            if (package == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(package);
+        }
+
 
         //---------------------------------------------------------------------------------------------------------------
         //for uploading images

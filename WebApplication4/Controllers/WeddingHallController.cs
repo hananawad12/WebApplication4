@@ -154,6 +154,43 @@ namespace WeddingGo.Controllers
 
         }
 
+
+        [HttpGet("SearchByName/{name}")]
+        public IActionResult GetWeddingHall([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var WeddingHall = db.GetByName(name);
+
+            if (WeddingHall == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(WeddingHall);
+        }
+
+        [HttpGet("SearchByFullName/{name}")]
+        public IActionResult GetWeddingHalll([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<WeddingHall> WeddingHalls = db.GetByName(name);
+
+            if (WeddingHalls.Count > 0)
+                return Ok(WeddingHalls);
+            else
+                return NotFound();
+        }
+
         [HttpPost("register")]
         //public async Task<IActionResult> Register(string username,string password)
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto UserForRegiterDto)
@@ -235,11 +272,11 @@ namespace WeddingGo.Controllers
         {
             //i do not understand why ???
             //not correct
-            //if (AtelierId != int.Parse(Atelier.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (WeddingHallId != int.Parse(WeddingHall.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             //correct
-            //if (AtelierId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (WeddingHallId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             var userFromRepo = db.GetById(WeddingHallId);

@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190623210435_add reservation table")]
+    partial class addreservationtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,8 +182,6 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("PhotographerId");
 
-                    b.Property<decimal>("Price");
-
                     b.Property<DateTime>("StartDate");
 
                     b.Property<int?>("WeddingHallId");
@@ -299,30 +298,6 @@ namespace WeddingGo.Migrations
                     b.HasIndex("WeddingHallId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("WeddingGo.Models.Reservation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int?>("OffersId");
-
-                    b.Property<int?>("PackagesId");
-
-                    b.Property<int?>("UsersId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OffersId");
-
-                    b.HasIndex("PackagesId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("WeddingGo.Models.Atelier", b =>
@@ -512,21 +487,6 @@ namespace WeddingGo.Migrations
                     b.HasOne("WeddingGo.Models.WeddingHall")
                         .WithMany("Posts")
                         .HasForeignKey("WeddingHallId");
-                });
-
-            modelBuilder.Entity("WeddingGo.Models.Reservation", b =>
-                {
-                    b.HasOne("WeddingGo.Models.Offer", "Offers")
-                        .WithMany("Reservations")
-                        .HasForeignKey("OffersId");
-
-                    b.HasOne("WeddingGo.Models.Package", "Packages")
-                        .WithMany()
-                        .HasForeignKey("PackagesId");
-
-                    b.HasOne("WeddingGo.Models.User", "Users")
-                        .WithMany("Reservations")
-                        .HasForeignKey("UsersId");
                 });
 #pragma warning restore 612, 618
         }

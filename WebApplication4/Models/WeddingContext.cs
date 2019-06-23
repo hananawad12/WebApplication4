@@ -42,6 +42,8 @@ namespace WeddingGo.Models
         public DbSet<Like> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+
 
 
 

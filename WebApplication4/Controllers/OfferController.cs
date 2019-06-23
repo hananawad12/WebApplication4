@@ -22,19 +22,21 @@ namespace WeddingGo.Controllers
     public class OfferController : ControllerBase
     {
 		private readonly IRepository<Offer> db;
+        private readonly IPriceRepository<Offer> dbp;
         private readonly IConfiguration config;
         private readonly IPhotoRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
-        public OfferController(IRepository<Offer> _db, IConfiguration _config, IPhotoRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
+        public OfferController(IRepository<Offer> _db, IPriceRepository<Offer> _dbp, IConfiguration _config, IPhotoRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
 		{
             db = _db;
             config = _config;
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
             _repo = repo;
+            dbp = _dbp;
 
             Account acc = new Account(
                 _cloudinaryConfig.Value.CloudName,
@@ -81,8 +83,28 @@ namespace WeddingGo.Controllers
 			return Ok(Offer);
 		}
 
-		// PUT: api/Offer/5
-		[HttpPut("{id}")]
+        // GET: api/Offer/5
+        [HttpGet("SearchByPrice/{price}")]
+        public IActionResult GetOffer([FromRoute] decimal price)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var Offer = dbp.SearchPrice(price);
+
+            if (Offer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Offer);
+        }
+
+        // PUT: api/Offer/5
+        [HttpPut("{id}")]
 		public IActionResult PutOffer([FromRoute] int id, [FromBody] Offer Offer)
 		{
 			if (!ModelState.IsValid)

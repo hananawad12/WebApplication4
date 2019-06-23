@@ -72,7 +72,13 @@ namespace WeddingGo
 
             services.AddScoped<IRepository<Like>, LikeRepository>();
 
-            //for testing
+            services.AddScoped<IRepository<Reservation>, PackageRepository>();
+
+            services.AddScoped<IPriceRepository<Offer>, OfferRepository>();
+
+            services.AddScoped<IPriceRepository<Package>, PackageRepositery>();
+
+
             services.AddScoped<PackageRepositery, PackageRepositery>();
 
 

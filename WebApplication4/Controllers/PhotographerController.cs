@@ -153,6 +153,43 @@ namespace WeddingGo.Controllers
 
         }
 
+
+        [HttpGet("SearchByName/{name}")]
+        public IActionResult GetPhotographers([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            List<Photographer> Photographers = db.GetByName(name);
+
+            if (Photographers.Count > 0)
+                return Ok(Photographers);
+            else
+                return NotFound();
+        }
+
+        [HttpGet("SearchByFullName/{name}")]
+        public IActionResult GetPhotographer([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var Photographer = db.GetByFullName(name);
+
+            if (Photographer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(Photographer);
+        }
+
         [HttpPost("register")]
         //public async Task<IActionResult> Register(string username,string password)
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto UserForRegiterDto)
@@ -232,11 +269,11 @@ namespace WeddingGo.Controllers
         {
             //i do not understand why ???
             //not correct
-            //if (AtelierId != int.Parse(Atelier.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (PhotographerId != int.Parse(Photographer.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             //correct
-            //if (AtelierId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            //if (PhotographerId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             //    return Unauthorized();
 
             var userFromRepo = db.GetById(PhotographerId);

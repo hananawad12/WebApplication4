@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190623234046_update price column")]
+    partial class updatepricecolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,7 +182,7 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("PhotographerId");
 
-                    b.Property<decimal>("Price");
+                    b.Property<double>("Price");
 
                     b.Property<DateTime>("StartDate");
 
@@ -217,7 +218,7 @@ namespace WeddingGo.Migrations
 
                     b.Property<int?>("PhotographerId");
 
-                    b.Property<decimal>("Price");
+                    b.Property<double>("Price");
 
                     b.Property<int?>("WeddingHallId");
 

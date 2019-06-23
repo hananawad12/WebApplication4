@@ -146,9 +146,25 @@ namespace WeddingGo.Models.Repositery
 			return false;
 		}
 
-        public MakeupArtist GetByName(string name)
+        public List<MakeupArtist> GetByName(string name)
         {
-            throw new NotImplementedException();
+            return db.Clients.OfType<MakeupArtist>().Include(ww => ww.Packages)
+                                               .Include(u => u.Posts)
+                                               .Include(a => a.Busies)
+                                               .Include(b => b.Offers)
+                                               .Include(m => m.Photos)
+                                               .Where(t => t.Name.ToLower().Contains(name.ToLower()))
+                                               .ToList();
+        }
+
+        public MakeupArtist GetByFullName(string name)
+        {
+            return db.Clients.OfType<MakeupArtist>().Include(ww => ww.Packages)
+                                               .Include(u => u.Posts)
+                                               .Include(a => a.Busies)
+                                               .Include(b => b.Offers)
+                                               .Include(m => m.Photos)
+                                               .FirstOrDefault(t => t.Name.ToLower() == name.ToLower());
         }
     }
 

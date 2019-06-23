@@ -13,7 +13,9 @@ namespace WeddingGo.Models
 		public string Name { get; set; }
 		[Required]
 		public string Description { get; set; }
-		[DataType(DataType.Date)]
+        [Required]
+        public decimal Price { get; set; }
+        [DataType(DataType.Date)]
 		[DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
 		[Display(Name= "Start Date")]
         public DateTime StartDate { get; set; }
@@ -26,11 +28,16 @@ namespace WeddingGo.Models
 
         public virtual ICollection< Client> Clients { get; set; }
 
+        public virtual ICollection<Reservation> Reservations { get; set; }
+
+
         public Offer()
         {
             
             Clients = new HashSet<Client>();
             Photos = new HashSet<Photo>();
+            Reservations = new HashSet<Reservation>();
+
 
         }
 

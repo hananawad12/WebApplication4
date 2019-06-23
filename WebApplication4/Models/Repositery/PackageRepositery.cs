@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-	public class PackageRepositery:IRepository<Package>
+	public class PackageRepositery:IRepository<Package>,IPriceRepository<Package>
 	{
 		private bool disposed = false;
 
@@ -78,7 +78,12 @@ namespace WeddingGo.Models.Repositery
 			return db.Packages.Count(e => e.Id == id) > 0;
 		}
 
-	}
+        public Package SearchPrice(decimal price)
+        {
+            return db.Packages.Include(m => m.Photos).FirstOrDefault(t => t.Price == price);
+
+        }
+    }
 
 	
 }

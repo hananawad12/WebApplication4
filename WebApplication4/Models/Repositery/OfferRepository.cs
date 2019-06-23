@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace WeddingGo.Models.Repositery
 {
-	public class OfferRepository : IRepository<Offer>
+	public class OfferRepository : IRepository<Offer>,IPriceRepository<Offer>
 	{
 		private bool disposed = false;
 		WeddingContext db;
-		public OfferRepository(WeddingContext _db)
+
+
+        public OfferRepository(WeddingContext _db)
 		{
 			db = _db;
 		}
@@ -72,6 +74,9 @@ namespace WeddingGo.Models.Repositery
 			return db.Offers.Count(e => e.Id == id) > 0;
 		}
 
-
-	}
+        public Offer SearchPrice(decimal price)
+        {
+            return db.Offers.Include(m => m.Photos).FirstOrDefault(t => t.Price == price);
+        }
+    }
 }

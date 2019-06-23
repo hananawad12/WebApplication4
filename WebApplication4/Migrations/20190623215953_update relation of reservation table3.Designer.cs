@@ -12,9 +12,10 @@ using WeddingGo.Models;
 namespace WeddingGo.Migrations
 {
     [DbContext(typeof(WeddingContext))]
-    partial class WeddingContextModelSnapshot : ModelSnapshot
+    [Migration("20190623215953_update relation of reservation table3")]
+    partial class updaterelationofreservationtable3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -180,8 +181,6 @@ namespace WeddingGo.Migrations
                         .IsRequired();
 
                     b.Property<int?>("PhotographerId");
-
-                    b.Property<decimal>("Price");
 
                     b.Property<DateTime>("StartDate");
 
@@ -521,7 +520,7 @@ namespace WeddingGo.Migrations
                         .HasForeignKey("OffersId");
 
                     b.HasOne("WeddingGo.Models.Package", "Packages")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("PackagesId");
 
                     b.HasOne("WeddingGo.Models.User", "Users")

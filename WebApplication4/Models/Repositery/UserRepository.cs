@@ -136,7 +136,14 @@ namespace WeddingGo.Models.Repositery
 			return false;
 		}
 
-        public User GetByName(string name)
+      
+
+        List<User> IClientRepositery<User>.GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        User IClientRepositery<User>.GetByFullName(string name)
         {
             throw new NotImplementedException();
         }

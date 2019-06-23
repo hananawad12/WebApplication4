@@ -44,15 +44,7 @@ namespace WeddingGo.Models.Repositery
                                                     .FirstOrDefault(t => t.Id == id);
 		}
 
-        public WeddingHall GetByName(string name)
-        {
-            return db.Clients.OfType<WeddingHall>().Include(ww => ww.Packages)
-                                                    .Include(u => u.Posts)
-                                                    .Include(a => a.Busies)
-                                                    .Include(b => b.Offers)
-                                                    .Include(m => m.Photos)
-                                                    .FirstOrDefault(t => t.Name == name); ;
-        }
+       
 
         public void Insert(WeddingHall item)
 		{
@@ -155,6 +147,27 @@ namespace WeddingGo.Models.Repositery
 			return false;
 		}
 
-       
+        public List<WeddingHall> GetByName(string name)
+        {
+            return db.Clients.OfType<WeddingHall>().Include(ww => ww.Packages)
+                                               .Include(u => u.Posts)
+                                               .Include(a => a.Busies)
+                                               .Include(b => b.Offers)
+                                               .Include(m => m.Photos)
+                                               .Where(t => t.Name.ToLower().Contains(name.ToLower()))
+                                               .ToList();
+        }
+
+        public WeddingHall GetByFullName(string name)
+        {
+            return db.Clients.OfType<WeddingHall>().Include(ww => ww.Packages)
+                                               .Include(u => u.Posts)
+                                               .Include(a => a.Busies)
+                                               .Include(b => b.Offers)
+                                               .Include(m => m.Photos)
+                                               .FirstOrDefault(t => t.Name.ToLower() == name.ToLower());
+        }
+
+      
     }
 }

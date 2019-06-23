@@ -81,25 +81,42 @@ namespace WeddingGo.Controllers
             return Ok(atelier);
         }
 
-       
-        //[HttpGet("SearchByName/{name}")]
-        //public IActionResult GetAtelier([FromRoute] string name)
-        //{
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [HttpGet("SearchByName/{name}")]
+        public IActionResult GetAteliers([FromRoute] string name)
+        {
 
-        //    var atelier = db.GetByName(name);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (atelier == null)
-        //    {
-        //        return NotFound();
-        //    }
+             List<Atelier> ateliers = db.GetByName(name);
 
-        //    return Ok(atelier);
-        //}
+            if (ateliers.Count > 0)
+                return Ok(ateliers);
+            else
+                return NotFound();
+        }
+
+        [HttpGet("SearchByFullName/{name}")]
+        public IActionResult GetAtelier([FromRoute] string name)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var atelier = db.GetByFullName(name);
+
+            if (atelier == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(atelier);
+        }
 
         // PUT: api/Atelier/5
         [HttpPut("{id}")]
