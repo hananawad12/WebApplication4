@@ -146,6 +146,10 @@ namespace WeddingGo.Models.Repositery
 			return false;
 		}
 
-	}
+        public MakeupArtist GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
 }

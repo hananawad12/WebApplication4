@@ -135,5 +135,10 @@ namespace WeddingGo.Models.Repositery
 				return true;
 			return false;
 		}
-	}
+
+        public User GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

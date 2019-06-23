@@ -11,6 +11,7 @@ namespace WeddingGo.Models.Repositery
 		List<T> GetAll();
 
 		T GetById(int id);
+        T GetByName(string name);
 		void Insert(T item);
 		void Update(T item);
 		void Delete(int ID);

@@ -45,7 +45,17 @@ namespace WeddingGo.Models.Repositery
                                                .FirstOrDefault(t => t.Id == id);
 		}
 
-		public void Insert(Atelier item)
+        public Atelier GetByName(string name)
+        {
+            return db.Clients.OfType<Atelier>().Include(ww => ww.Packages)
+                                               .Include(u => u.Posts)
+                                               .Include(a => a.Busies)
+                                               .Include(b => b.Offers)
+                                               .Include(m => m.Photos)
+                                               .FirstOrDefault(t => t.Name.ToLower().Contains(name.ToLower()));
+        }
+
+        public void Insert(Atelier item)
 		{
 			db.Clients.Add(item);
 
@@ -145,5 +155,7 @@ namespace WeddingGo.Models.Repositery
 				return true;
 			return false;
 		}
-	}
+
+        
+    }
 }

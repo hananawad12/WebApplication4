@@ -144,5 +144,10 @@ namespace WeddingGo.Models.Repositery
 				return true;
 			return false;
 		}
-	}
+
+        public Photographer GetByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
