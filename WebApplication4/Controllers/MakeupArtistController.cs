@@ -182,6 +182,23 @@ namespace WeddingGo.Controllers
 
         }
 
+        [HttpGet("Notify/{id}")]
+        public IActionResult Notify([FromRoute] int id)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var users = db.GetNotification(id);
+
+            if (users.Count > 0)
+                return Ok(users);
+            else
+                return NotFound();
+        }
+
         [HttpGet("SearchByFullName/{name}")]
         public IActionResult GetMakeupAtrist([FromRoute] string name)
         {

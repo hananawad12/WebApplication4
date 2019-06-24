@@ -147,5 +147,10 @@ namespace WeddingGo.Models.Repositery
         {
             throw new NotImplementedException();
         }
+
+        public List<User> GetNotification(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

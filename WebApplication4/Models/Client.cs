@@ -31,7 +31,9 @@ namespace WeddingGo.Models
 		public virtual ICollection<Comment> Comments { get; set; }
 		public virtual ICollection<Like> Likes { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<Reservation> Reservations { get; set; }
 
+     
 
         public Client()
         {
@@ -39,6 +41,7 @@ namespace WeddingGo.Models
             Comments = new HashSet<Comment>();
             Likes = new HashSet<Like>();
             Photos = new HashSet<Photo>();
+            Reservations = new HashSet<Reservation>();
         }
 	}
 

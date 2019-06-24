@@ -168,6 +168,17 @@ namespace WeddingGo.Models.Repositery
                                                .FirstOrDefault(t => t.Name.ToLower() == name.ToLower());
         }
 
-      
+
+        public List<User> GetNotification(int id)
+        {
+            var users = (from item in db.Reservations
+                         where item.WeddingHalls.Id == id
+                         select item.Users).ToList();
+
+            return users;
+
+        }
+
+
     }
 }

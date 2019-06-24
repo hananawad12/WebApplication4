@@ -18,10 +18,12 @@ namespace WeddingGo.Models
         //public virtual ICollection<Package> Packages { get; set; }
 
 
+        public virtual Atelier Ateliers { get; set; }
+        public virtual MakeupArtist MakeupArtists { get; set; }
+        public virtual WeddingHall WeddingHalls { get; set; }
+        public virtual Photographer Photographers { get; set; }
         public virtual User Users { get; set; }
-
         public virtual Offer Offers { get; set; }
-
         public virtual Package Packages { get; set; }
 
 

@@ -118,6 +118,25 @@ namespace WeddingGo.Controllers
             return Ok(atelier);
         }
 
+
+
+        [HttpGet("Notify/{id}")]
+        public IActionResult Notify([FromRoute] int id)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var users = db.GetNotification(id);
+
+            if (users.Count > 0)
+                return Ok(users);
+            else
+                return NotFound();
+        }
+
         // PUT: api/Atelier/5
         [HttpPut("{id}")]
         public IActionResult PutAtelier([FromRoute] int id, [FromBody] Atelier atelier)

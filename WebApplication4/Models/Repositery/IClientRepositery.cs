@@ -23,6 +23,8 @@ namespace WeddingGo.Models.Repositery
         Task<T> Login(string username, string password);
         Task<bool> UserExists(string username);
 
+        List<User> GetNotification(int id);
+
 
 
     }

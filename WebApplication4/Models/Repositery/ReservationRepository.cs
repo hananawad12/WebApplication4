@@ -26,7 +26,7 @@ namespace WeddingGo.Models.Repositery
         {
             return db.Reservations.Include(m => m.Offers)
                                    .Include(m => m.Packages)
-                                   .Include(m => m.Users)
+                       
                                    .ToList();
         }
 
@@ -34,7 +34,7 @@ namespace WeddingGo.Models.Repositery
         {
             return db.Reservations.Include(m => m.Offers)
                                    .Include(m => m.Packages)
-                                   .Include(m => m.Users)
+                                   
                                    .FirstOrDefault(t => t.Id == id);
         }
 

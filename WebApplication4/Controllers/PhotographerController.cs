@@ -190,6 +190,23 @@ namespace WeddingGo.Controllers
             return Ok(Photographer);
         }
 
+        [HttpGet("Notify/{id}")]
+        public IActionResult Notify([FromRoute] int id)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var users = db.GetNotification(id);
+
+            if (users.Count > 0)
+                return Ok(users);
+            else
+                return NotFound();
+        }
+
         [HttpPost("register")]
         //public async Task<IActionResult> Register(string username,string password)
         public async Task<IActionResult> Register([FromBody]UserForRegisterDto UserForRegiterDto)

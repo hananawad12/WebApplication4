@@ -167,6 +167,16 @@ namespace WeddingGo.Models.Repositery
 			return false;
 		}
 
-        
+        public List<User> GetNotification(int id)
+        {
+            var users = (from item in db.Reservations
+                        where item.Ateliers.Id == id
+                        select item.Users).ToList();
+
+            return users;
+
+        }
+
+
     }
 }

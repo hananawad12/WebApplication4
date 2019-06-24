@@ -9,13 +9,7 @@ namespace WeddingGo.Models
     public class User:Client
     {
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
-
-        public User()
-        {
-            Reservations = new HashSet<Reservation>();
-        }
-
+      
 
     }
 }
